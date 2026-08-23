@@ -1,0 +1,262 @@
+{
+  "platform": "Enterprise Multi-Sector BI Platform",
+  "dashboards_count": 7,
+  "dashboards": {
+    "executive_command_center": {
+      "title": "Executive Command Center",
+      "slug": "executive-command-center",
+      "description": "Unified Cross-Sector Enterprise KPI Monitor & Data Pipeline Health",
+      "charts": [
+        {
+          "id": "exec_cc_fraud",
+          "title": "Credit Card Fraud Volume",
+          "type": "big_number",
+          "metric": "total_volume_usd"
+        },
+        {
+          "id": "exec_bank_exposure",
+          "title": "Banking Credit Exposure",
+          "type": "big_number",
+          "metric": "total_credit_granted_usd"
+        },
+        {
+          "id": "exec_health_occ",
+          "title": "Avg Bed Occupancy Rate",
+          "type": "gauge",
+          "metric": "avg_bed_occupancy_pct"
+        },
+        {
+          "id": "exec_clin_readmit",
+          "title": "30-Day Readmission Rate",
+          "type": "big_number",
+          "metric": "readmission_rate_pct"
+        },
+        {
+          "id": "exec_ins_claims",
+          "title": "Insurance Claims Volume",
+          "type": "big_number",
+          "metric": "total_claim_amount_usd"
+        },
+        {
+          "id": "exec_retail_rev",
+          "title": "Gross Retail Revenue",
+          "type": "big_number",
+          "metric": "gross_revenue_usd"
+        },
+        {
+          "id": "exec_pipeline_health",
+          "title": "Medallion Pipeline Health",
+          "type": "status_badge",
+          "metric": "100% Idempotent"
+        }
+      ]
+    },
+    "fraud_intelligence": {
+      "title": "Credit Card Fraud Intelligence",
+      "slug": "fraud-intelligence",
+      "description": "Real-time Transaction Fraud Monitoring, Risk Scores & Champion Model Telemetry",
+      "charts": [
+        {
+          "id": "fraud_rate",
+          "title": "Fraud Rate (%)",
+          "type": "big_number",
+          "metric": "fraud_rate_pct"
+        },
+        {
+          "id": "fraud_volume",
+          "title": "Total Transaction Volume",
+          "type": "big_number",
+          "metric": "total_volume_usd"
+        },
+        {
+          "id": "risk_distribution",
+          "title": "Transaction Risk Level Breakdown",
+          "type": "pie",
+          "dimensions": [
+            "HIGH",
+            "MEDIUM",
+            "LOW"
+          ]
+        },
+        {
+          "id": "fraud_trend",
+          "title": "24h Fraud Volume Trend",
+          "type": "line",
+          "x": "Time",
+          "y": "Amount"
+        },
+        {
+          "id": "champion_model",
+          "title": "Champion XGBoost Telemetry",
+          "type": "key_value",
+          "metrics": {
+            "F1": 0.9796,
+            "ROC_AUC": 1.0,
+            "Latency": "4.2ms"
+          }
+        }
+      ]
+    },
+    "banking_credit_risk": {
+      "title": "Banking Credit Risk Analytics",
+      "slug": "banking-credit-risk",
+      "description": "Portfolio Loan Default Rates, Credit Granted & Customer Exposure Analysis",
+      "charts": [
+        {
+          "id": "bank_default_rate",
+          "title": "Default Rate (%)",
+          "type": "big_number",
+          "metric": "default_rate_pct"
+        },
+        {
+          "id": "bank_credit_granted",
+          "title": "Total Credit Granted",
+          "type": "big_number",
+          "metric": "total_credit_granted_usd"
+        },
+        {
+          "id": "bank_income_vs_risk",
+          "title": "Annual Income vs Loan Default Risk",
+          "type": "scatter",
+          "x": "AnnualIncome",
+          "y": "DefaultRisk"
+        },
+        {
+          "id": "bank_loan_purpose",
+          "title": "Loan Purpose Distribution",
+          "type": "bar",
+          "x": "Purpose",
+          "y": "CreditAmount"
+        }
+      ]
+    },
+    "healthcare_utilization": {
+      "title": "Healthcare Capacity & Facility Utilization",
+      "slug": "healthcare-utilization",
+      "description": "State Hospital Bed Capacity, Occupancy Rates & OPD/IPD Load Metrics",
+      "charts": [
+        {
+          "id": "health_hospitals",
+          "title": "Hospitals Reporting",
+          "type": "big_number",
+          "metric": "total_hospitals_reporting"
+        },
+        {
+          "id": "health_occupancy",
+          "title": "Average Bed Occupancy (%)",
+          "type": "gauge",
+          "metric": "avg_bed_occupancy_pct"
+        },
+        {
+          "id": "health_opd_ipd",
+          "title": "OPD / IPD Ratio",
+          "type": "big_number",
+          "metric": "avg_opd_ipd_ratio"
+        },
+        {
+          "id": "health_state_dist",
+          "title": "Hospital Capacity by State",
+          "type": "bar",
+          "x": "state",
+          "y": "total_beds"
+        }
+      ]
+    },
+    "clinical_readmission": {
+      "title": "Clinical EHR Readmission Risk",
+      "slug": "clinical-readmission",
+      "description": "30-Day Hospital Readmission Risk, Patient Stay Duration & EHR Diagnoses",
+      "charts": [
+        {
+          "id": "clin_readmit_rate",
+          "title": "30-Day Readmission Rate (%)",
+          "type": "big_number",
+          "metric": "readmission_rate_pct"
+        },
+        {
+          "id": "clin_avg_stay",
+          "title": "Average Hospital Stay (Days)",
+          "type": "big_number",
+          "metric": "avg_hospital_stay_days"
+        },
+        {
+          "id": "clin_stay_dist",
+          "title": "Hospital Stay Duration Distribution",
+          "type": "histogram",
+          "x": "TimeInHospitalDays"
+        },
+        {
+          "id": "clin_age_risk",
+          "title": "Readmission Rate by Age Group",
+          "type": "bar",
+          "x": "AgeGroup",
+          "y": "Readmitted30Days"
+        }
+      ]
+    },
+    "insurance_claims_fraud": {
+      "title": "Insurance Claims Fraud Analytics",
+      "slug": "insurance-claims-fraud",
+      "description": "Auto Insurance Claim Fraud Rates, Total Losses & Incident Category Analysis",
+      "charts": [
+        {
+          "id": "ins_claims_count",
+          "title": "Total Claims Processed",
+          "type": "big_number",
+          "metric": "total_claims_processed"
+        },
+        {
+          "id": "ins_fraud_rate",
+          "title": "Claims Fraud Rate (%)",
+          "type": "big_number",
+          "metric": "claims_fraud_rate_pct"
+        },
+        {
+          "id": "ins_claim_amount",
+          "title": "Total Claims Value ($)",
+          "type": "big_number",
+          "metric": "total_claim_amount_usd"
+        },
+        {
+          "id": "ins_incident_breakdown",
+          "title": "Claims Fraud by Incident Type",
+          "type": "bar",
+          "x": "IncidentType",
+          "y": "FraudReported"
+        }
+      ]
+    },
+    "retail_demand_revenue": {
+      "title": "Retail Sales & Product Demand Forecasting",
+      "slug": "retail-demand-revenue",
+      "description": "Invoice Revenues, Item Sales Quantities & Product Demand Trends",
+      "charts": [
+        {
+          "id": "retail_gross_rev",
+          "title": "Gross Revenue ($)",
+          "type": "big_number",
+          "metric": "gross_revenue_usd"
+        },
+        {
+          "id": "retail_items_sold",
+          "title": "Total Units Sold",
+          "type": "big_number",
+          "metric": "total_items_sold"
+        },
+        {
+          "id": "retail_invoices",
+          "title": "Total Invoices Processed",
+          "type": "big_number",
+          "metric": "total_invoices"
+        },
+        {
+          "id": "retail_cat_perf",
+          "title": "Revenue by Product Category",
+          "type": "pie",
+          "x": "Category",
+          "y": "TotalSales"
+        }
+      ]
+    }
+  }
+}
