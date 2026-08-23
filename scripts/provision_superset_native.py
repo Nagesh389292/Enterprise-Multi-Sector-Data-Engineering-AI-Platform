@@ -1,7 +1,7 @@
 """
 Native Apache Superset ORM Provisioner.
 Executed inside enterprise_superset container to programmatically create
-Database, Datasets, Charts, and Dashboards with zero manual steps.
+Database, Datasets, SqlMetrics, Charts, and Dashboards with zero manual steps.
 """
 
 import sys
@@ -17,7 +17,7 @@ def provision():
     with app.app_context():
         from superset import db
         from superset.models.core import Database
-        from superset.connectors.sqla.models import SqlaTable
+        from superset.connectors.sqla.models import SqlaTable, SqlMetric
         from superset.models.slice import Slice
         from superset.models.dashboard import Dashboard
 
@@ -36,19 +36,44 @@ def provision():
             db.session.commit()
             print(f"[SupersetProvisioner] Existing Database Verified: {db_name} (ID: {database.id})")
 
-        # 2. Register Datasets (SqlaTable)
+        # 2. Register Datasets (SqlaTable) & SqlMetrics
         tables_meta = [
-            ("gold_multi_sector_summary", "Unified Cross-Sector Gold Summary"),
-            ("gold_credit_card", "Credit Card Transactions & Fraud"),
-            ("gold_banking_loan_risk", "Banking Credit & Default Risk"),
-            ("gold_healthcare_ogd", "Healthcare Facility Capacity & Occupancy"),
-            ("gold_clinical_readmission", "Clinical EHR 30-Day Readmission Risk"),
-            ("gold_insurance_claims", "Insurance Claims Fraud Analytics"),
-            ("gold_retail_sales", "Retail Revenue & Product Demand")
+            ("gold_multi_sector_summary", "Unified Cross-Sector Gold Summary", [
+                ("primary_metric_value", "AVG(primary_metric_value)"),
+                ("secondary_metric_value", "AVG(secondary_metric_value)"),
+                ("total_records", "SUM(total_records)")
+            ]),
+            ("gold_credit_card", "Credit Card Transactions & Fraud", [
+                ("amount_usd", "SUM(amount_usd)"),
+                ("fraud_risk_score", "AVG(fraud_risk_score)"),
+                ("is_fraud", "SUM(is_fraud)")
+            ]),
+            ("gold_banking_loan_risk", "Banking Credit & Default Risk", [
+                ("default_risk_score", "AVG(default_risk_score)"),
+                ("loan_amount", "SUM(loan_amount)"),
+                ("applicant_income", "AVG(applicant_income)")
+            ]),
+            ("gold_healthcare_ogd", "Healthcare Facility Capacity & Occupancy", [
+                ("bed_occupancy_pct", "AVG(bed_occupancy_pct)"),
+                ("total_beds", "SUM(total_beds)"),
+                ("occupied_beds", "SUM(occupied_beds)")
+            ]),
+            ("gold_clinical_readmission", "Clinical EHR 30-Day Readmission Risk", [
+                ("readmission_risk", "AVG(readmission_risk)"),
+                ("days_in_hospital", "AVG(days_in_hospital)")
+            ]),
+            ("gold_insurance_claims", "Insurance Claims Fraud Analytics", [
+                ("fraud_probability", "AVG(fraud_probability)"),
+                ("claim_amount_usd", "SUM(claim_amount_usd)")
+            ]),
+            ("gold_retail_sales", "Retail Revenue & Product Demand", [
+                ("gross_revenue_usd", "SUM(gross_revenue_usd)"),
+                ("items_sold", "SUM(items_sold)")
+            ])
         ]
 
         dataset_map = {}
-        for tbl_name, verbose_name in tables_meta:
+        for tbl_name, verbose_name, metrics_list in tables_meta:
             sqla_tbl = db.session.query(SqlaTable).filter_by(database_id=database.id, table_name=tbl_name).first()
             if not sqla_tbl:
                 sqla_tbl = SqlaTable(
@@ -59,19 +84,32 @@ def provision():
                 )
                 db.session.add(sqla_tbl)
                 db.session.commit()
-                try:
-                    sqla_tbl.fetch_metadata()
-                    db.session.commit()
-                except Exception as ex:
-                    print(f"[SupersetProvisioner] Metadata fetch notice for {tbl_name}: {ex}")
                 print(f"[SupersetProvisioner] Registered Dataset: {tbl_name} (ID: {sqla_tbl.id})")
             else:
-                try:
-                    sqla_tbl.fetch_metadata()
-                    db.session.commit()
-                except Exception as ex:
-                    print(f"[SupersetProvisioner] Metadata fetch notice for {tbl_name}: {ex}")
                 print(f"[SupersetProvisioner] Existing Dataset Verified: {tbl_name} (ID: {sqla_tbl.id})")
+
+            # Fetch metadata to populate columns
+            try:
+                sqla_tbl.fetch_metadata()
+                db.session.commit()
+            except Exception as ex:
+                print(f"[SupersetProvisioner] Metadata fetch notice for {tbl_name}: {ex}")
+
+            # Register SqlMetrics explicitly on SqlaTable
+            for mname, mexpr in metrics_list:
+                existing_m = db.session.query(SqlMetric).filter_by(table_id=sqla_tbl.id, metric_name=mname).first()
+                if not existing_m:
+                    new_m = SqlMetric(
+                        metric_name=mname,
+                        expression=mexpr,
+                        table_id=sqla_tbl.id
+                    )
+                    db.session.add(new_m)
+                    print(f"   + SqlMetric added: '{mname}' -> {mexpr}")
+                else:
+                    existing_m.expression = mexpr
+
+            db.session.commit()
             dataset_map[tbl_name] = sqla_tbl
 
         # 3. Create Native Charts (Slice)
@@ -108,7 +146,7 @@ def provision():
                 "params": json.dumps({
                     "viz_type": "pie",
                     "datasource": f"{dataset_map['gold_credit_card'].id}__table",
-                    "metric": "count",
+                    "metric": "amount_usd",
                     "groupby": ["risk_level"]
                 })
             },

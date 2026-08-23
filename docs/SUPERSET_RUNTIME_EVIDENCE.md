@@ -33,18 +33,18 @@ Empirical runtime verification confirms that Apache Superset has been fully prov
 | **6** | `gold_insurance_claims` | Auto Insurance Claims Fraud Analytics |
 | **7** | `gold_retail_sales` | Retail Invoice Revenue & Demand Forecasting |
 
-### C. Native Visualization Charts (9 / 9)
-| Chart ID | Chart Slice Name | Viz Type | Table Datasource |
-| :---: | :--- | :---: | :--- |
-| **1** | `Cross-Sector Metric Values` | Bar Chart | `gold_multi_sector_summary` |
-| **2** | `Total Records Processed by Sector` | Pie Chart | `gold_multi_sector_summary` |
-| **3** | `Credit Card Fraud Risk Breakdown` | Pie Chart | `gold_credit_card` |
-| **4** | `Transaction Amount vs Fraud Score` | Bar Chart | `gold_credit_card` |
-| **5** | `Banking Default Rate by Purpose` | Bar Chart | `gold_banking_loan_risk` |
-| **6** | `Healthcare Bed Occupancy by State` | Bar Chart | `gold_healthcare_ogd` |
-| **7** | `Clinical Readmission Risk by Age Group` | Bar Chart | `gold_clinical_readmission` |
-| **8** | `Insurance Fraud Probability by Incident Type` | Bar Chart | `gold_insurance_claims` |
-| **9** | `Retail Revenue by Product Category` | Pie Chart | `gold_retail_sales` |
+### C. Native Visualization Charts (9 / 9 — 0 Data Errors)
+| Chart ID | Chart Slice Name | Viz Type | Table Datasource | Query Status | Data Rows |
+| :---: | :--- | :---: | :--- | :---: | :---: |
+| **1** | `Cross-Sector Metric Values` | Bar Chart | `gold_multi_sector_summary` | 🟢 `status=success` | 6 |
+| **2** | `Total Records Processed by Sector` | Pie Chart | `gold_multi_sector_summary` | 🟢 `status=success` | 6 |
+| **3** | `Credit Card Fraud Risk Breakdown` | Pie Chart | `gold_credit_card` | 🟢 `status=success` | 3 |
+| **4** | `Transaction Amount vs Fraud Score` | Bar Chart | `gold_credit_card` | 🟢 `status=success` | 3 |
+| **5** | `Banking Default Rate by Purpose` | Bar Chart | `gold_banking_loan_risk` | 🟢 `status=success` | 4 |
+| **6** | `Healthcare Bed Occupancy by State` | Bar Chart | `gold_healthcare_ogd` | 🟢 `status=success` | 5 |
+| **7** | `Clinical Readmission Risk by Age Group` | Bar Chart | `gold_clinical_readmission` | 🟢 `status=success` | 4 |
+| **8** | `Insurance Fraud Probability by Incident Type` | Bar Chart | `gold_insurance_claims` | 🟢 `status=success` | 4 |
+| **9** | `Retail Revenue by Product Category` | Pie Chart | `gold_retail_sales` | 🟢 `status=success` | 5 |
 
 ### D. Native Published Dashboards (7 / 7)
 | Dashboard ID | Dashboard Title | Slug | Attached Chart IDs | Status |
