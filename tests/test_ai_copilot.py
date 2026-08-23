@@ -12,6 +12,7 @@ from ai.rag.retriever import RAGRetriever
 from ai.rag.rag_pipeline import RAGPipeline
 
 from ai.llm.gemini_provider import GeminiProvider
+from ai.llm.oxalpha_provider import OxAlphaProvider
 from ai.llm.ollama_provider import OllamaProvider
 from ai.llm.provider_factory import LLMProviderFactory
 
@@ -125,6 +126,12 @@ class TestAICopilotRAG(unittest.TestCase):
         self.assertIn("provider", res)
         self.assertIn("text", res)
         self.assertIn("status", res)
+
+    def test_oxalpha_provider_availability(self):
+        """Verifies OxAlpha cloud provider initialization and availability logic."""
+        prov = OxAlphaProvider(api_key="sk-8tcBjFKP4IcSVercwy9LpT4LbS2EX5SUyeOQIsgms5mdxnSD")
+        self.assertTrue(prov.is_available())
+        self.assertEqual(prov.model, "oxalpha-flash-v1")
 
     def test_agentic_router_intents(self):
         """Verifies intent classification and execution across all 4 intent modes."""
