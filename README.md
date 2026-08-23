@@ -24,15 +24,21 @@ Modern enterprises require robust data infrastructure capable of processing hete
 
 ---
 
-## 🖼️ Visual Platform & Dashboard Demonstrations
+## 🖼️ Visual Platform & Logged-In Dashboard Demonstrations
 
-### 1. Apache Superset BI Executive Command Center
-![Apache Superset BI Dashboard](docs/images/superset_dashboard_demo.png)
+### 1. Apache Superset — Executive Command Center Dashboard
+![Apache Superset Executive Dashboard](docs/images/superset_executive_logged_in.png)
 
-### 2. React Command Center Web UI
+### 2. Apache Superset — Credit Card Fraud Intelligence Dashboard
+![Apache Superset Fraud Dashboard](docs/images/superset_fraud_dashboard.png)
+
+### 3. Apache Superset — Retail Sales & Demand Analytics Dashboard
+![Apache Superset Retail Dashboard](docs/images/superset_retail_dashboard.png)
+
+### 4. React Command Center Web UI
 ![React Command Center Web UI](docs/images/react_command_center_ui.png)
 
-### 3. System Architecture Topology
+### 5. System Architecture Topology
 ![System Architecture Diagram](docs/images/platform_architecture_diagram.png)
 
 ---
