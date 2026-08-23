@@ -28,8 +28,8 @@ class MLflowTracker:
         self.experiment_name = experiment_name
         os.makedirs(os.path.dirname(REGISTRY_META_PATH), exist_ok=True)
         
-        # Configure SQLite tracking URI for MLflow 3.x compatibility
-        sqlite_uri = f"sqlite:///{DB_PATH.replace('\\', '/')}"
+        clean_db_path = DB_PATH.replace("\\", "/")
+        sqlite_uri = f"sqlite:///{clean_db_path}"
         mlflow.set_tracking_uri(sqlite_uri)
 
         try:
