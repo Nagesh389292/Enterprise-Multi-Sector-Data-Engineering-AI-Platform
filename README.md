@@ -61,16 +61,125 @@
 
 ---
 
-## 📊 Live Superset BI Demonstration (Authenticated & Rendered)
+## 🖼️ Complete Implementation Visual Showcase & Detailed Explanations
 
-> The Gold analytical layer is exposed through Apache Superset, providing interactive dashboards for executive monitoring, fraud analytics, banking risk, healthcare utilization, clinical risk, insurance, and retail demand.
->  
-> **Infrastructure & Provisioning**:
-> - **Runtime Host**: Docker container `enterprise_superset` (`localhost:8088`)
-> - **Database Connections**: 1 (`Enterprise Analytics Engine` connected to SQLite / PostgreSQL Gold Data Marts)
-> - **Datasets Provisioned**: 7 (`gold_multi_sector_summary`, `gold_credit_card`, `gold_banking_loan_risk`, `gold_healthcare_ogd`, `gold_clinical_readmission`, `gold_insurance_claims`, `gold_retail_sales`)
-> - **Slice Charts**: 9 native pie and table plugins (`status=success`)
-> - **Published Dashboards**: 7
+### 1. Operational Command Center (React TypeScript Web UI)
+![Operational Command Center](docs/media/final_demo/01_react_command_center.png)
+
+- **What is Shown**: The live operational command center web application running on `http://localhost:3000`, built using Vite, React 18, and TypeScript.
+- **What to Notice**: Real-time cross-sector metrics display unified record counts, pipeline execution status, and active sector selectors without any rendering errors or missing assets.
+- **Technology & Subsystem Used**: Frontend: React TypeScript, Tailwind CSS, Recharts. Backend API: FastAPI, Uvicorn on port 8000.
+
+---
+
+### 2. PySpark Medallion Data Engineering Lakehouse
+![PySpark Medallion Data Engineering Lakehouse](docs/media/final_demo/02_data_pipeline.png)
+
+- **What is Shown**: Architectural card detailing the three-stage PySpark Medallion Lakehouse processing pipeline.
+- **What to Notice**:
+  - **Bronze Stage**: Ingests raw streaming JSON/CSV data with UUID primary keys and metadata provenance.
+  - **Silver Stage**: Enforces schema validation rules and null check assertions; malformed records are isolated to `data/quarantine/`.
+  - **Gold Stage**: Aggregates domain key performance indicators across financial, healthcare, insurance, and retail sectors.
+- **Technology & Subsystem Used**: Apache PySpark 3.5.0, Delta Lake 3.0, Parquet columnar format, Python 3.11.
+
+---
+
+### 3. Multi-Tier AI Copilot Gateway & AST Security
+![Multi-Tier AI Copilot Gateway & AST Security](docs/media/final_demo/03_ai_copilot.png)
+
+- **What is Shown**: Live natural language query interface powered by the multi-tier AI Copilot router.
+- **What to Notice**: Natural language input *"Which sector currently shows the highest risk according to available analytics?"* is evaluated against Tier 1 Google Gemini 2.5 Flash and Tier 2 OxAlpha via OpenRouter. Generated SQL queries pass through a `sqlglot` Abstract Syntax Tree (AST) parser to enforce read-only `SELECT` queries and block DDL/DML injection.
+- **Technology & Subsystem Used**: Google Gemini API, OpenRouter Gateway (`stealth/ox-alpha`), `sqlglot` AST Parser, FastAPI.
+
+---
+
+### 4. Databricks SQL Delta Lake Synchronization & Reconciliation
+![Databricks SQL Delta Lake Reconciliation Report](docs/media/final_demo/04_databricks.png)
+
+- **What is Shown**: Automated reconciliation matrix comparing local Gold data marts against Databricks Delta tables in SQL Warehouse `1f1403d78bfa0404`.
+- **What to Notice**: 100% row matching (1,000 / 1,000 rows across 6 sectors) and exact metric alignment, confirming **0.00% data variance** across the lakehouse.
+- **Technology & Subsystem Used**: Databricks SQL Connector (`databricks-sql-python`), Delta Lake REST API, PySpark.
+
+---
+
+### 5. Apache Superset BI — Executive Command Center
+![Apache Superset BI — Executive Command Center](docs/media/final_demo/05_superset_executive.png)
+
+- **What is Shown**: Executive Command Center dashboard (Dashboard ID 1) running live inside the Docker container `enterprise_superset` on `http://localhost:8088`.
+- **What to Notice**: Unified cross-sector record breakdown charts displaying rendered analytics across all 6 sectors without error boxes or missing metric warnings.
+- **Technology & Subsystem Used**: Apache Superset 4.0, Docker Compose, PostgreSQL Gold Database Engine.
+
+---
+
+### 6. Apache Superset BI — Credit Card Fraud Intelligence
+![Apache Superset BI — Credit Card Fraud Intelligence](docs/media/final_demo/06_superset_fraud.png)
+
+- **What is Shown**: Credit Card Fraud Intelligence dashboard (Dashboard ID 2) exposing transaction fraud risk telemetry.
+- **What to Notice**: Rendered visualizations for transaction amount distributions, fraud risk score breakdowns, and risk tier classifications (Low, Medium, High).
+- **Technology & Subsystem Used**: Apache Superset 4.0, SQLite/PostgreSQL `gold_credit_card` dataset.
+
+---
+
+### 7. Apache Superset BI — Banking Credit Risk Analytics
+![Apache Superset BI — Banking Credit Risk Analytics](docs/media/final_demo/07_superset_banking.png)
+
+- **What is Shown**: Banking Credit Risk Analytics dashboard (Dashboard ID 3) detailing loan portfolio metrics.
+- **What to Notice**: Default probability distribution across loan purpose categories (Debt Consolidation, Home Improvement, Small Business) and Debt-to-Income (DTI) risk tiers.
+- **Technology & Subsystem Used**: Apache Superset 4.0, `gold_banking_loan_risk` dataset.
+
+---
+
+### 8. Apache Superset BI — Healthcare Capacity & Utilization
+![Apache Superset BI — Healthcare Capacity & Utilization](docs/media/final_demo/08_superset_healthcare.png)
+
+- **What is Shown**: Healthcare Capacity & Utilization dashboard (Dashboard ID 4) tracking hospital bed occupancy.
+- **What to Notice**: State-level hospital bed availability, ICU bed occupancy rates, and capacity utilization metrics.
+- **Technology & Subsystem Used**: Apache Superset 4.0, `gold_healthcare_ogd` dataset.
+
+---
+
+### 9. Apache Superset BI — Clinical EHR Readmission Risk
+![Apache Superset BI — Clinical EHR Readmission Risk](docs/media/final_demo/09_superset_readmission.png)
+
+- **What is Shown**: Clinical EHR Readmission Risk dashboard (Dashboard ID 5) exposing 30-day patient readmission telemetry.
+- **What to Notice**: Readmission probability metrics broken down by patient age demographics and prior hospitalization counts.
+- **Technology & Subsystem Used**: Apache Superset 4.0, `gold_clinical_readmission` dataset.
+
+---
+
+### 10. Apache Superset BI — Insurance Claims Fraud Analytics
+![Apache Superset BI — Insurance Claims Fraud Analytics](docs/media/final_demo/10_superset_insurance.png)
+
+- **What is Shown**: Insurance Claims Fraud Analytics dashboard (Dashboard ID 6) tracking claim fraud indicators.
+- **What to Notice**: Fraud likelihood scores categorized by claim incident type (Auto, Property, Casualty) and policyholder risk factors.
+- **Technology & Subsystem Used**: Apache Superset 4.0, `gold_insurance_claims` dataset.
+
+---
+
+### 11. Apache Superset BI — Retail Sales & Product Demand
+![Apache Superset BI — Retail Sales & Product Demand](docs/media/final_demo/11_superset_retail.png)
+
+- **What is Shown**: Retail Sales & Product Demand dashboard (Dashboard ID 7) displaying commercial retail telemetry.
+- **What to Notice**: Gross revenue totals, transaction volume, and product category demand across retail sectors.
+- **Technology & Subsystem Used**: Apache Superset 4.0, `gold_retail_sales` dataset.
+
+---
+
+### 12. GitHub Actions Master CI/CD Pipeline
+![GitHub Actions Master CI/CD Pipeline](docs/media/final_demo/12_github_actions.png)
+
+- **What is Shown**: Continuous Integration pipeline card representing GitHub Actions Run #44 execution.
+- **What to Notice**: All 4 pipeline jobs (`test-python`, `build-frontend`, `docker-build`, `deploy-gcp-cloud-run`) executed successfully with 71/71 unit tests passing in under 260 seconds.
+- **Technology & Subsystem Used**: GitHub Actions, Docker Buildx, Python `unittest` framework.
+
+---
+
+### 13. Cloud Infrastructure Boundary (Terraform HCL)
+![Cloud Infrastructure Boundary](docs/media/final_demo/13_terraform_boundary.png)
+
+- **What is Shown**: Cloud infrastructure boundary card defining Google Cloud Platform infrastructure.
+- **What to Notice**: Declarative Terraform HCL manifests (`infrastructure/terraform/main.tf`) define GCP Cloud Run services, GCS Medallion buckets, and BigQuery datasets for project `enterprise-data-ai-platform`. Live Cloud Run hosting is intentionally unexecuted to maintain a zero-cost local release candidate baseline.
+- **Technology & Subsystem Used**: Terraform 1.6 HCL, GCP Cloud Run, Google Cloud Storage, BigQuery.
 
 ---
 
