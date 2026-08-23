@@ -544,7 +544,7 @@ export default function App() {
             <div>
               <h3 style={{ margin: 0 }}>Enterprise Data & AI Copilot + RAG</h3>
               <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', margin: '4px 0 0 0' }}>
-                Agentic Router | Multi-Tier LLM (Gemini / Ollama) | Hugging Face FAISS Vector Retrieval | Read-Only SQL Tool
+                Agentic Router | Multi-Tier LLM (Gemini / OxAlpha) | Hugging Face FAISS Vector Retrieval | Read-Only SQL Tool
               </p>
             </div>
             <span className="badge badge-emerald">ACTIVE ENGINE</span>

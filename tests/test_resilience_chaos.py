@@ -4,7 +4,7 @@ Automated Resilience & Failure Chaos Test Suite.
 Simulates subsystem failures:
 1. Redis Stream Producer / Consumer Offline -> Synchronous Fallback
 2. PostgreSQL Database Connection Failure -> SQLite (platform_analytics.db) Fallback
-3. Gemini LLM API Disconnection -> Local Ollama / Rule-based SQL Router Fallback
+3. Gemini LLM API Disconnection -> Secondary OxAlpha / Rule-based SQL Router Fallback
 4. Data Quarantine Ingestion -> Failure Isolation & Telemetry Collection
 """
 
@@ -51,7 +51,7 @@ class TestResilienceChaosSuite(unittest.TestCase):
             self.fail(f"Postgres fallback raised unexpected exception: {e}")
 
     def test_03_gemini_api_offline_copilot_fallback(self):
-        """Simulates Gemini API rate limit / offline error; verifies local Ollama / rule-based fallback."""
+        """Simulates Gemini API rate limit / offline error; verifies OxAlpha / rule-based fallback."""
         router = AgenticRouter()
         res = router.process_query("What is our total credit card fraud count?")
         self.assertIn("intent", res)

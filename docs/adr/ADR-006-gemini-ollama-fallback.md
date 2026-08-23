@@ -1,13 +1,17 @@
-# ADR-006: Multi-Tier LLM Architecture (Gemini API + Ollama Local Fallback)
+# ADR-006: Multi-Tier LLM Architecture (Gemini API + OxAlpha API Fallback)
 
 ## Context & Problem Statement
-The Enterprise AI Copilot requires natural language SQL synthesis and metric reasoning with resilience against API rate limits or network offline states.
+The platform requires a high-reasoning LLM engine for AI Copilot queries, Text-to-SQL generation, and RAG policy synthesis. Cloud API rate limits, timeouts, or network outages must not degrade platform availability.
 
 ## Decision Drivers
-- High precision reasoning via cloud LLM (Google Gemini API).
-- Guaranteed local offline execution capability without external API dependency.
-- Cost control via intent routing.
+* High-reasoning cloud LLM capabilities (Gemini 2.5 Flash / OxAlpha)
+* Resilient multi-tier fallback without external service daemon dependencies
+* Security AST validation for SQL queries before database execution
+
+## Considered Options
+1. Direct single-provider API calls (vulnerable to API rate limits and downtime)
+2. Multi-tier provider gateway with deterministic fallback
 
 ## Decision Outcome
-**Chosen Option: Multi-Tier Intent Router with Primary Gemini & Local Ollama / Mock Fallback**.
-Queries are routed through `AgenticRouter`. If network latency or API key constraints prevent Gemini calls, the system gracefully falls back to local Ollama / rule-based SQL synthesis.
+**Chosen Option: Multi-Tier Intent Router with Primary Gemini API, Secondary OxAlpha API & Deterministic Rule Engine Fallback**.
+Queries are routed through `AgenticRouter`. If network latency or API key constraints prevent Gemini calls, the system gracefully falls back to secondary OxAlpha API or deterministic rule-based SQL synthesis.

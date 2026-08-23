@@ -67,7 +67,7 @@ We classify each platform milestone using the strict 5-stage verification taxono
 | **M1: Credit Card Fraud Slice** | Ingestion, validation, XGBoost fraud model, streaming ticker | 🟢 **RUNTIME VERIFIED** | Real-time event generator streams transactions to UI; XGBoost evaluates fraud risk. |
 | **M2: PySpark Medallion Lake**| Bronze ➔ Silver ➔ Gold Parquet data lakehouse transformations | 🟢 **RUNTIME VERIFIED** | Generates Gold summary metrics in `data/lake/gold/master_multi_sector_gold.json`. |
 | **M3: ML Engineering / MLOps**| XGBoost, LightGBM, SHAP, PSI/KS Drift Monitoring, MLflow | 🟢 **UNIT VERIFIED** | Evaluated on Kaggle/German Credit datasets; 65/65 unit tests pass. |
-| **M4: Enterprise AI Copilot**| Gemini/Ollama gateway, AST read-only Text-to-SQL, Evidence Layer | 🟢 **RUNTIME VERIFIED** | Tested via `ai/agent_orchestrator.py`; AST parser blocks non-SELECT statements. |
+| **M4: Enterprise AI Copilot**| Gemini/OxAlpha gateway, AST read-only Text-to-SQL, Evidence Layer | 🟢 **RUNTIME VERIFIED** | Tested via `ai/agent_orchestrator.py`; AST parser blocks non-SELECT statements. |
 | **M5: Real-World Multi-Sector**| Kaggle, German Credit, OGD HMIS, UCI Diabetes real schemas | 🟢 **RUNTIME VERIFIED** | 6 real-world benchmark datasets generated & stored in `data/raw/real_world/`. |
 | **M6: BI / Apache Superset** | Superset DDL dashboards, DAX measures, export manifests | 🟡 **IMPLEMENTED / UNIT VERIFIED** | Manifest created (`bi/superset_manifest.json`); native Docker runtime (`PAT-01`) pending. |
 | **M7: Advanced Analytics** | Time-series forecasting, customer clustering, anomaly queue | 🟢 **UNIT VERIFIED** | 6 analytics engines verified passing in `tests/test_advanced_analytics.py`. |

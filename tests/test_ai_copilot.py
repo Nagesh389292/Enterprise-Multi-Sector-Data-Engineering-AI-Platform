@@ -13,7 +13,6 @@ from ai.rag.rag_pipeline import RAGPipeline
 
 from ai.llm.gemini_provider import GeminiProvider
 from ai.llm.oxalpha_provider import OxAlphaProvider
-from ai.llm.ollama_provider import OllamaProvider
 from ai.llm.provider_factory import LLMProviderFactory
 
 from ai.agent.sql_tool import ReadOnlySQLTool
