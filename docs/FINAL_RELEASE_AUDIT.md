@@ -67,11 +67,11 @@ The project evaluates every component against a strict 5-stage verification taxo
 
 ### Gate PAT-02: GitHub Actions CI/CD Pipeline Execution
 - **Status**: 🟢 `RUNTIME VERIFIED` (CLOSED)
-- **Empirical Evidence**: Master workflow [.github/workflows/ci.yml](file:///c:/Users/NAGESH%20REDDY/Desktop/Data%20Analytics/.github/workflows/ci.yml) executed live on GitHub cloud runner (Run #27 / `32653264877`) for commit `f032846`. All 4 jobs (`test-python`, `build-frontend`, `docker-build`, `deploy-gcp-cloud-run`) completed with **`conclusion=success`** (0 failures, 0 errors).
+- **Empirical Evidence**: Master workflow [.github/workflows/ci.yml](file:///c:/Users/NAGESH%20REDDY/Desktop/Data%20Analytics/.github/workflows/ci.yml) executed live on GitHub cloud runner (Run #31 / `32656450504`) for commit `6d81338`. All 4 jobs (`test-python`, `build-frontend`, `docker-build`, `deploy-gcp-cloud-run`) completed with **`conclusion=success`** (0 failures, 0 errors).
 
-### Gate PAT-03: GCP Cloud Run & BigQuery Deployment
-- **Status**: 🔴 `IMPLEMENTED / IaC DECLARED` (OPEN)
-- **Empirical Evidence**: Declarative Terraform HCL manifests in `infrastructure/terraform/` verified (`verify_milestone9_cloud.py`). Cloud Run deployment step configured in `ci.yml` with conditional execution if `GCP_SA_KEY` repository secret is present.
+### Gate PAT-03: GCP Cloud Run, BigQuery & Cloud Storage Infrastructure
+- **Status**: 🔴 `IaC DECLARED / NOT DEPLOYED — GCP billing unavailable`
+- **Empirical Evidence**: Infrastructure is fully declared in Terraform HCL (`infrastructure/terraform/main.tf`, `gcp_resources.tf`, `cost_controls.tf`) covering Cloud Run, BigQuery datasets, GCS Medallion buckets, and cost alerts. Cloud LLM models (Google Gemini 2.5 Flash API + OxAlpha via OpenRouter Gateway returning `LIVE_HTTP_SUCCESS`) are integrated into the platform. Live GCP Cloud Run service creation is intentionally unexecuted to maintain a zero-cost local release candidate baseline.
 
 ---
 
