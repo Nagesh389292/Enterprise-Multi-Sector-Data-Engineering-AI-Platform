@@ -1,5 +1,7 @@
 # 🏛️ Platform Architecture Specification
 
+> **Official Classification**: `Release Candidate / Production-Like Prototype`
+
 ## 1. End-to-End System Topology
 
 ```
@@ -42,7 +44,7 @@ DATABRICKS DELTA LAKE   POSTGRESQL / SQLITE      APACHE SUPERSET BI
 
 ### 2.4 Multi-Tier LLM Gateway & AST Security
 - **Router (`AgenticRouter`)**: Classifies intents into ML Analysis, SQL Analytics, RAG Knowledge Retrieval, or Hybrid modes.
-- **LLM Gateway Chain**: Google Gemini 2.5 Flash $\rightarrow$ OxAlpha (`stealth/ox-alpha`) via OpenRouter Gateway (**HTTP 200 Live Verified**) $\rightarrow$ Deterministic Analytics Engine Fallback.
+- **LLM Gateway Chain**: Google Gemini 2.5 Flash $\rightarrow$ OxAlpha (`stealth/ox-alpha`) via OpenRouter Gateway (**HTTP 200 Live Verified**) $\rightarrow$ Deterministic Analytics Engine Fallback. (Ollama completely removed).
 - **AST SQL Security**: `sqlglot` AST parser validates LLM-generated SQL queries prior to execution, asserting root is `SELECT` and strictly blocking `DROP`, `DELETE`, `UPDATE`, or multi-statement injections.
 - **RAG Pipeline**: Document loader, 300-character recursive chunker, HuggingFace embeddings (`all-MiniLM-L6-v2`), FAISS vector store, and citation output manifests.
 
@@ -52,5 +54,5 @@ DATABRICKS DELTA LAKE   POSTGRESQL / SQLITE      APACHE SUPERSET BI
 - **Frontend**: Vite + React TypeScript interactive web app running on `localhost:3000`.
 
 ### 2.6 DevOps & CI/CD Boundary
-- **GitHub Actions**: 4-job master workflow (`.github/workflows/ci.yml`) executing Python unit tests, Vite React build, and multi-stage Docker image builds with **Run #28 SUCCESS**.
-- **Terraform GCP IaC Boundary**: Declared in `infrastructure/terraform/main.tf` for Google Cloud Run, Cloud Storage, and BigQuery. (IaC declared / local release candidate baseline).
+- **GitHub Actions**: 4-job master workflow (`.github/workflows/ci.yml`) executing Python unit tests (71/71 PASS), Vite React build, and multi-stage Docker image builds with **Run #52 SUCCESS**.
+- **Terraform GCP IaC Boundary**: Declared in `infrastructure/terraform/main.tf` for Google Cloud Run, Cloud Storage, and BigQuery. (IaC declared / local release candidate baseline; live GCP Cloud Run service intentionally unexecuted).
