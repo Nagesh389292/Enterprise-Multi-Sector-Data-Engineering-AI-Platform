@@ -14,9 +14,9 @@
 
 ## 🎥 Complete Platform Demonstration (6.5-Minute Video & Embedded AI Voice)
 
-- 🎬 **Complete Video Demo (Muxed Audio Track)**: [`docs/media/enterprise_platform_demo_video.mp4`](docs/media/enterprise_platform_demo_video.mp4)
+- 🎬 **Complete Video Demo (Muxed AAC Audio Track)**: [`docs/media/enterprise_platform_demo_video.mp4`](docs/media/enterprise_platform_demo_video.mp4)
 - 🎙️ **Standalone AI Voice Narration WAV**: [`docs/media/demo_narration.wav`](docs/media/demo_narration.wav)
-- 📐 **Video Technical Specifications**: 1280x720 (720p HD) | Duration: **6m 32s** | Audio Codec: AAC 96kbps | Video Codec: H.264 | Audio Embedded: **YES**
+- 📐 **Video Technical Specifications**: 1280x720 (720p HD) | Duration: **6m 32.5s** (392.5s) | Audio Codec: AAC 96kbps | Video Codec: H.264 25fps | Audio Embedded: **YES**
 
 ### 🎙️ AI Voice Storyboard & Narration Transcript
 
@@ -47,10 +47,10 @@
 > **05:44 — Section 9: Master CI/CD Pipeline & Testing**  
 > *"DevOps automation is powered by a 4-job GitHub Actions workflow executing on every push to main. The master test suite run_tests.py runs 71 automated unit tests in under 260 seconds with 0 failures and 0 errors. CI jobs validate Python tests, Vite frontend build, and multi-stage Docker container images."*  
 >  
-> **06:16 — Section 10: Infrastructure Boundary & Google Cloud Platform**  
+> **06:02 — Section 10: Infrastructure Boundary & Google Cloud Platform**  
 > *"Google Cloud Platform infrastructure for project enterprise-data-ai-platform is fully declared using Terraform HCL. Declarative manifests define Cloud Run API backend services, GCS Medallion buckets, BigQuery analytics datasets, and cost alert safeguards. Live GCP Cloud Run hosting is unexecuted due to GCP billing availability, keeping the project cleanly scoped as a release candidate."*  
 >  
-> **06:41 — Section 11: Summary & Project Classification**  
+> **06:17 — Section 11: Summary & Official Architecture Classification**  
 > *"In summary, this platform demonstrates enterprise-grade Data Engineering, Databricks Delta Lake reconciliation, multi-tier AI gateway security, and native BI integration. The project is officially classified as an Enterprise-Grade Production-Like Prototype and Release Candidate with 71/71 passing unit tests and 0.00 percent Databricks variance."*
 
 ---

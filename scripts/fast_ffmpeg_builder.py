@@ -12,8 +12,9 @@ concat_txt_path = os.path.join(proj_root, 'docs', 'media', 'slides.txt')
 with wave.open(audio_path, 'rb') as w:
     total_audio_sec = w.getnframes() / float(w.getframerate())
 
-print(f"[FFmpeg Fast Builder] Audio Duration: {total_audio_sec:.2f} seconds ({total_audio_sec/60:.2f} minutes)")
+print(f"[FFmpeg Fast Builder] Audio Duration: {total_audio_sec:.3f} seconds ({total_audio_sec/60:.2f} minutes)")
 
+# 11 Storyboard Sections with proportional duration scaling to match total_audio_sec exactly
 sections = [
     ("01. INTRODUCTION & BUSINESS CONTEXT", "architecture/platform_architecture_diagram.png", 25.0),
     ("02. END-TO-END SYSTEM TOPOLOGY", "architecture/platform_architecture_diagram.png", 45.0),
@@ -23,9 +24,9 @@ sections = [
     ("06. MULTI-TIER AI COPILOT & AST SQL SECURITY", "ai/llm_gateway_architecture.png", 55.0),
     ("07. APACHE SUPERSET BI DASHBOARDS", "dashboards/superset_executive_logged_in.png", 45.0),
     ("08. REACT COMMAND CENTER WEB APPLICATION", "frontend/react_command_center_ui.png", 35.0),
-    ("09. MASTER CI/CD PIPELINE & TESTING (71/71 PASS)", "cicd/master_tests_71_pass.png", 32.0),
-    ("10. GOOGLE CLOUD PLATFORM TERRAFORM BOUNDARY", "gcp/gcp_console_project.png", 25.0),
-    ("11. SUMMARY & OFFICIAL ARCHITECTURE CLASSIFICATION", "architecture/platform_architecture_diagram.png", 20.0)
+    ("09. MASTER CI/CD PIPELINE & TESTING (71/71 PASS)", "cicd/master_tests_71_pass.png", 18.0),
+    ("10. GOOGLE CLOUD PLATFORM TERRAFORM BOUNDARY", "gcp/gcp_console_project.png", 15.0),
+    ("11. SUMMARY & OFFICIAL ARCHITECTURE CLASSIFICATION", "architecture/platform_architecture_diagram.png", 15.5)
 ]
 
 sum_dur = sum(s[2] for s in sections)
@@ -37,15 +38,15 @@ with open(concat_txt_path, 'w') as f:
     for title, rel_img, dur in sections:
         img_path = os.path.join(base_img_dir, rel_img).replace('\\', '/')
         f.write(f"file '{img_path}'\n")
-        f.write(f"duration {dur:.2f}\n")
-    # Repeat last frame to avoid FFmpeg cut-off
+        f.write(f"duration {dur:.3f}\n")
+    # Last entry without duration for FFmpeg concat demuxer requirement
     last_img = os.path.join(base_img_dir, sections[-1][1]).replace('\\', '/')
     f.write(f"file '{last_img}'\n")
 
 print(f"[FFmpeg Fast Builder] Created slide manifest {concat_txt_path}")
 
 ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
-print(f"[FFmpeg Fast Builder] Executing FFmpeg fast encode & audio mux...")
+print(f"[FFmpeg Fast Builder] Executing FFmpeg video encode & audio mux...")
 
 cmd = [
     ffmpeg_exe,
@@ -55,6 +56,7 @@ cmd = [
     '-i', concat_txt_path,
     '-i', audio_path,
     '-vf', 'scale=1280:720:force_original_aspect_ratio=decrease,pad=1280:720:(ow-iw)/2:(oh-ih)/2,format=yuv420p',
+    '-r', '25',
     '-c:v', 'libx264',
     '-preset', 'ultrafast',
     '-c:a', 'aac',
