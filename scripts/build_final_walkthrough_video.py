@@ -6,14 +6,14 @@ import win32com.client
 
 proj_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 media_dir = os.path.join(proj_root, 'docs', 'media')
-demo_dir = os.path.join(media_dir, 'final_demo')
+superset_dir = os.path.join(media_dir, 'final_demo', 'superset')
 os.makedirs(media_dir, exist_ok=True)
 
 audio_path = os.path.join(media_dir, 'demo_narration.wav')
 final_video_path = os.path.join(media_dir, 'enterprise_platform_demo_video.mp4')
 concat_txt_path = os.path.join(media_dir, 'slides.txt')
 
-print("=== STEP 1: GENERATING 8.5-MINUTE STORYTELLING AI NARRATION ===")
+print("=== STEP 1: GENERATING 8.5-MINUTE STORYTELLING AI NARRATION WITH DEDICATED SUPERSET WALKTHROUGH ===")
 speaker = win32com.client.Dispatch('SAPI.SpVoice')
 speaker.Rate = -1 # Senior engineering presentation cadence
 
@@ -43,7 +43,7 @@ Section 6: Multi-Tier AI Copilot Gateway and AST Security.
 Now the platform moves from analytics to natural language interaction. A business user does not need to write SQL. They can simply ask a question in natural language, such as: Which sector currently shows the highest risk according to available analytics? The Agentic Router prioritizes Google Gemini 2.5 Flash as Tier 1, OxAlpha via OpenRouter Gateway as Tier 2 with live HTTP 200 verification, and an offline deterministic analytics engine as Tier 3 fallback. Legacy Ollama daemons have been completely purged. To guarantee security, every generated Text-to-SQL query passes through a sqlglot AST parser that asserts the query root is strictly a SELECT statement, preventing SQL injection, DDL, or DML mutations.
 
 Section 7: Apache Superset Business Intelligence Layer.
-Gold analytical data is exposed visually through Apache Superset. Business intelligence is provisioned programmatically using Python REST API scripts, establishing 1 database connection, 7 SqlaTable datasets, 9 slice charts, and 7 published dashboards on Docker port 8088. Executives can inspect clean, interactive pie and table visualizations across Executive Command, Fraud Intelligence, and Retail Demand dashboards without visualization errors.
+Now let's move from the operational application to the business intelligence layer. Gold analytical data is exposed through Apache Superset running live on Docker port 8088, provisioned programmatically with 1 database connection, 7 SqlaTable datasets, 9 slice charts, and 7 published dashboards. Here we can see the Executive Command Center, rendering unified cross-sector distribution metrics. Next is the Credit Card Fraud Intelligence dashboard, allowing analysts to examine fraud risk score breakdowns. The Retail Demand dashboard provides visibility into sales volume and gross revenue totals across product categories. Every dashboard renders rendered charts and KPI metrics without visualization errors.
 
 Section 8: React Command Center Web Application.
 For live operational monitoring, the React TypeScript Command Center provides an interactive web interface running on port 3000. Users can type natural language queries into the AI Copilot, view real-time streaming telemetry, monitor sector key performance indicators, and trigger lakehouse runs directly from the browser.
@@ -66,21 +66,23 @@ with wave.open(audio_path, 'rb') as w:
 
 print(f"[Audio Generator] Generated Storytelling WAV Audio: {audio_path} ({audio_dur:.3f} seconds / {audio_dur/60:.2f} minutes)")
 
-print("=== STEP 2: ENCODING 25FPS MP4 VIDEO WITH EMBEDDED AAC AUDIO (ZERO SILENCE) ===")
+print("=== STEP 2: ENCODING 25FPS MP4 VIDEO WITH DEDICATED SUPERSET DASHBOARD TIMELINE ===")
 
-# 11 Storyboard Sections matching fresh docs/media/final_demo/ images
+# 13 Storyboard Sections including dedicated Superset dashboards
 sections = [
     ("01. PROJECT & BUSINESS PROBLEM", "media/final_demo/01_architecture.png", 45.0),
     ("02. END-TO-END SYSTEM ARCHITECTURE", "media/final_demo/01_architecture.png", 45.0),
     ("03. DATA ENGINEERING & PYSPARK MEDALLION", "media/final_demo/02_data_pipeline.png", 60.0),
     ("04. DATABRICKS SQL RECONCILIATION", "media/final_demo/03_databricks_reconciliation.png", 50.0),
     ("05. MACHINE LEARNING & MLOPS SUITE", "media/final_demo/04_ml_mlops.png", 50.0),
-    ("06. AI COPILOT & GATEWAY SECURITY", "media/final_demo/05_ai_copilot.png", 70.0),
-    ("07. APACHE SUPERSET BI DASHBOARDS", "media/final_demo/06_superset_executive.png", 70.0),
-    ("08. REACT COMMAND CENTER WEB APP", "media/final_demo/09_react_command_center.png", 50.0),
-    ("09. GITHUB ACTIONS MASTER CI/CD", "media/final_demo/10_github_actions.png", 40.0),
-    ("10. TERRAFORM GCP CLOUD BOUNDARY", "media/final_demo/11_terraform_boundary.png", 40.0),
-    ("11. FINAL SUMMARY & CLASSIFICATION", "media/final_demo/01_architecture.png", 30.0)
+    ("06. AI COPILOT & GATEWAY SECURITY", "media/final_demo/05_ai_copilot.png", 60.0),
+    ("07. SUPERSET BI — EXECUTIVE COMMAND CENTER", "media/final_demo/superset/01_superset_executive.png", 25.0),
+    ("08. SUPERSET BI — FRAUD INTELLIGENCE", "media/final_demo/superset/02_superset_fraud.png", 25.0),
+    ("09. SUPERSET BI — RETAIL DEMAND & REVENUE", "media/final_demo/superset/07_superset_retail.png", 25.0),
+    ("10. REACT COMMAND CENTER WEB APP", "media/final_demo/09_react_command_center.png", 50.0),
+    ("11. GITHUB ACTIONS MASTER CI/CD", "media/final_demo/10_github_actions.png", 40.0),
+    ("12. TERRAFORM GCP CLOUD BOUNDARY", "media/final_demo/11_terraform_boundary.png", 40.0),
+    ("13. FINAL SUMMARY & CLASSIFICATION", "media/final_demo/01_architecture.png", 30.0)
 ]
 
 sum_dur = sum(s[2] for s in sections)

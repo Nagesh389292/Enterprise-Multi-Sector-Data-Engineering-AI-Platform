@@ -14,9 +14,9 @@
 
 ## 🎬 Full Live Project Demonstration (8-Minute Screen Walkthrough & Muxed AI Voice)
 
-- 🎬 **Complete Live Demo Video (Muxed AAC Audio)**: [`docs/media/enterprise_platform_demo_video.mp4`](docs/media/enterprise_platform_demo_video.mp4) (13.71 MB MP4)
-- 🎙️ **Standalone AI Voice Narration WAV**: [`docs/media/demo_narration.wav`](docs/media/demo_narration.wav) (21.31 MB Audio)
-- 📐 **Video Technical Specifications**: 1280x720 (720p HD) | Duration: **8m 03s** (483.6s) | Audio Codec: AAC 95kbps | Video Codec: H.264 25fps | Audio Embedded: **YES**
+- 🎬 **Complete Live Demo Video (Muxed AAC Audio)**: [`docs/media/enterprise_platform_demo_video.mp4`](docs/media/enterprise_platform_demo_video.mp4) (14.11 MB MP4)
+- 🎙️ **Standalone AI Voice Narration WAV**: [`docs/media/demo_narration.wav`](docs/media/demo_narration.wav) (22.10 MB Audio)
+- 📐 **Video Technical Specifications**: 1280x720 (720p HD) | Duration: **8m 21s** (501.5s) | Audio Codec: AAC 95kbps | Video Codec: H.264 25fps | Audio Embedded: **YES**
 
 ### 🎙️ AI Voice Storyboard & Storytelling Transcript
 
@@ -38,20 +38,87 @@
 > **04:10 — Section 6: Multi-Tier AI Copilot Gateway & AST Security**  
 > *"Now the platform moves from analytics to natural language interaction. A business user does not need to write SQL. They can simply ask a question in natural language, such as: Which sector currently shows the highest risk according to available analytics? The Agentic Router prioritizes Google Gemini 2.5 Flash as Tier 1, OxAlpha via OpenRouter Gateway as Tier 2 with live HTTP 200 verification, and an offline deterministic analytics engine as Tier 3 fallback. Legacy Ollama daemons have been completely purged. To guarantee security, every generated Text-to-SQL query passes through a sqlglot AST parser that asserts the query root is strictly a SELECT statement, preventing SQL injection, DDL, or DML mutations."*  
 >  
-> **05:20 — Section 7: Apache Superset Business Intelligence Layer**  
-> *"Gold analytical data is exposed visually through Apache Superset. Business intelligence is provisioned programmatically using Python REST API scripts, establishing 1 database connection, 7 SqlaTable datasets, 9 slice charts, and 7 published dashboards on Docker port 8088. Executives can inspect clean, interactive pie and table visualizations across Executive Command, Fraud Intelligence, and Retail Demand dashboards without visualization errors."*  
+> **05:10 — Section 7: Apache Superset Business Intelligence Layer (75 Seconds)**  
+> *"Now let's move from the operational application to the business intelligence layer. Gold analytical data is exposed through Apache Superset running live on Docker port 8088, provisioned programmatically with 1 database connection, 7 SqlaTable datasets, 9 slice charts, and 7 published dashboards. Here we can see the Executive Command Center, rendering unified cross-sector distribution metrics. Next is the Credit Card Fraud Intelligence dashboard, allowing analysts to examine fraud risk score breakdowns. The Retail Demand dashboard provides visibility into sales volume and gross revenue totals across product categories. Every dashboard renders rendered charts and KPI metrics without visualization errors."*  
 >  
-> **06:30 — Section 8: React Command Center Web Application**  
+> **06:25 — Section 8: React Command Center Web Application**  
 > *"For live operational monitoring, the React TypeScript Command Center provides an interactive web interface running on port 3000. Users can type natural language queries into the AI Copilot, view real-time streaming telemetry, monitor sector key performance indicators, and trigger lakehouse runs directly from the browser."*  
 >  
-> **07:20 — Section 9: Master CI/CD Pipeline & Testing**  
+> **07:15 — Section 9: Master CI/CD Pipeline & Testing**  
 > *"DevOps automation is enforced by a four-job GitHub Actions workflow executing on every push to main. The master test runner run_tests.py executes 71 automated unit tests in under 260 seconds with 0 failures and 0 errors. The CI pipeline validates Python logic, Vite React frontend compilation, and multi-stage Docker container builds."*  
 >  
-> **08:00 — Section 10: Infrastructure Boundary & Google Cloud Platform**  
+> **07:55 — Section 10: Infrastructure Boundary & Google Cloud Platform**  
 > *"To be completely clear and honest about the infrastructure boundary: Google Cloud Platform resources for project enterprise-data-ai-platform are fully declared using Terraform HCL for Cloud Run services, Cloud Storage Medallion buckets, and BigQuery datasets. However, live Cloud Run hosting was intentionally not executed because the project currently operates without an active GCP billing setup."*  
 >  
-> **08:03 — Section 11: Final Summary & Official Architecture Classification**  
+> **08:15 — Section 11: Final Summary & Official Architecture Classification**  
 > *"In summary, this platform combines PySpark data engineering, Databricks Delta Lake synchronization, predictive machine learning, multi-tier generative AI security, native BI dashboards, and continuous integration into one unified architecture. The project is officially classified as an Enterprise-Grade Production-Like Prototype and Release Candidate with 71 passing tests and 0.00 percent Databricks variance."*
+
+---
+
+## 📊 Apache Superset Business Intelligence
+
+> The Gold analytical layer is exposed through Apache Superset, providing interactive dashboards for executive monitoring, fraud analytics, banking risk, healthcare utilization, clinical risk, insurance, and retail demand.
+>  
+> **Infrastructure & Provisioning**:
+> - **Runtime Host**: Docker container `enterprise_superset` (`localhost:8088`)
+> - **Database Connections**: 1 (`Enterprise Analytics Engine` connected to SQLite / PostgreSQL Gold Data Marts)
+> - **Datasets Provisioned**: 7 (`gold_multi_sector_summary`, `gold_credit_card`, `gold_banking_loan_risk`, `gold_healthcare_ogd`, `gold_clinical_readmission`, `gold_insurance_claims`, `gold_retail_sales`)
+> - **Slice Charts**: 9 native pie and table plugins (`status=success`)
+> - **Published Dashboards**: 7
+
+### 1. Executive Command Center Dashboard
+- **What to Notice**: Cross-sector metric breakdown and processing volume distribution across all 6 sectors without error boxes.
+- **Technology Used**: Apache Superset 4.0, SQLite / PostgreSQL Gold Data Marts, Docker.
+
+![Executive Command Center Dashboard](docs/media/final_demo/superset/01_superset_executive.png)
+
+---
+
+### 2. Credit Card Fraud Intelligence Dashboard
+- **What to Notice**: Transaction risk score distribution (LOW, MEDIUM, HIGH risk tiers) and anomaly velocity metrics.
+- **Technology Used**: Apache Superset 4.0, PySpark Gold Data Marts.
+
+![Credit Card Fraud Intelligence Dashboard](docs/media/final_demo/superset/02_superset_fraud.png)
+
+---
+
+### 3. Banking Credit Risk Analytics Dashboard
+- **What to Notice**: Loan default probability breakdown across debt-to-income tiers and loan purpose categories.
+- **Technology Used**: Apache Superset 4.0, Gold Data Marts.
+
+![Banking Credit Risk Analytics Dashboard](docs/media/final_demo/superset/03_superset_banking.png)
+
+---
+
+### 4. Healthcare Capacity & Utilization Dashboard
+- **What to Notice**: State-level hospital bed occupancy and capacity utilization telemetry.
+- **Technology Used**: Apache Superset 4.0, Open Government Data (OGD) Marts.
+
+![Healthcare Capacity Dashboard](docs/media/final_demo/superset/04_superset_healthcare.png)
+
+---
+
+### 5. Clinical EHR Readmission Risk Dashboard
+- **What to Notice**: 30-day patient readmission risk breakdown across age groups and prior hospitalization counts.
+- **Technology Used**: Apache Superset 4.0, Clinical EHR Gold Data Marts.
+
+![Clinical Readmission Risk Dashboard](docs/media/final_demo/superset/05_superset_readmission.png)
+
+---
+
+### 6. Insurance Claims Fraud Analytics Dashboard
+- **What to Notice**: Incident type fraud probability and reported loss distribution metrics.
+- **Technology Used**: Apache Superset 4.0, Insurance Claims Gold Data Marts.
+
+![Insurance Claims Fraud Dashboard](docs/media/final_demo/superset/06_superset_insurance.png)
+
+---
+
+### 7. Retail Sales & Product Demand Dashboard
+- **What to Notice**: Gross revenue totals and product sales volume distribution across retail categories.
+- **Technology Used**: Apache Superset 4.0, Retail Sales Gold Data Marts.
+
+![Retail Demand Dashboard](docs/media/final_demo/superset/07_superset_retail.png)
 
 ---
 
@@ -144,18 +211,6 @@ The natural language AI gateway features a resilient fallback chain:
 
 ---
 
-## 📊 Apache Superset BI Layer
-
-Apache Superset is natively provisioned using Python REST APIs (`scripts/provision_superset_native.py`), establishing:
-- **1 Database**: `Enterprise Analytics Engine`
-- **7 Datasets**: `gold_multi_sector_summary`, `gold_credit_card`, `gold_banking_loan_risk`, `gold_healthcare_ogd`, `gold_clinical_readmission`, `gold_insurance_claims`, `gold_retail_sales`.
-- **9 Slice Charts**: All chart `viz_type` configurations configured with native `pie` and `table` plugins returning `status=success`.
-- **7 Published Dashboards**: Available live on Docker container `localhost:8088`.
-
-![Apache Superset Executive Dashboard](docs/media/final_demo/06_superset_executive.png)
-
----
-
 ## 💻 React Command Center Web Frontend
 
 A modern React TypeScript single-page application built with Vite (`frontend/`) providing real-time data visualizations, interactive AI Copilot chat interface, and system health status.
@@ -176,59 +231,8 @@ GitHub Actions master workflow (`.github/workflows/ci.yml`) executes on every pu
 
 ---
 
-## 🖼️ Fresh Live Demonstration Visual Gallery
+## 🖼️ Cloud Infrastructure Boundary (Terraform HCL)
 
-### 1. End-to-End System Architecture Topology
-- **Heading**: System Architecture & Data Flow Topology
-- **Explanation**: Illustrates the end-to-end data pipeline from live external streaming sources down to PySpark Medallion layers, Databricks Delta Lake, AI Gateway, Superset BI, and React frontend.
-- **What to Notice**: Multi-tier LLM gateway fallback path and AST SQL security barrier.
-- **Technology Used**: PySpark, Databricks, Gemini, OxAlpha, Apache Superset, React, Docker.
-
-![System Architecture Diagram](docs/media/final_demo/01_architecture.png)
-
----
-
-### 2. Apache Superset — Executive Command Center Dashboard
-- **Heading**: Executive Command Center BI Dashboard
-- **Explanation**: Live Apache Superset dashboard rendering cross-sector metrics and total record processing distribution across 6 sectors.
-- **What to Notice**: Native dataset integration and clean pie chart distribution without error boxes.
-- **Technology Used**: Apache Superset 4.0, SQLite / PostgreSQL Gold Data Marts, Docker.
-
-![Apache Superset Executive Dashboard](docs/media/final_demo/06_superset_executive.png)
-
----
-
-### 3. Apache Superset — Credit Card Fraud Intelligence Dashboard
-- **Heading**: Credit Card Fraud Risk Analytics
-- **Explanation**: Detailed credit card fraud risk score breakdown (LOW, MEDIUM, HIGH risk tiers) and transaction amount metrics.
-- **What to Notice**: Sector-specific metric aggregation produced by PySpark Gold stage.
-- **Technology Used**: Apache Superset 4.0, PySpark Gold Data Marts.
-
-![Apache Superset Fraud Dashboard](docs/media/final_demo/07_superset_fraud.png)
-
----
-
-### 4. Apache Superset — Retail Sales & Demand Analytics Dashboard
-- **Heading**: Retail Gross Revenue & Demand Breakdown
-- **Explanation**: Product demand and gross revenue breakdown across retail product categories.
-- **What to Notice**: Real-world benchmark dataset ingestion and automated dataset provisioning.
-- **Technology Used**: Apache Superset 4.0, Python REST API Provisioner.
-
-![Apache Superset Retail Dashboard](docs/media/final_demo/08_superset_retail.png)
-
----
-
-### 5. React Command Center Web UI
-- **Heading**: Real-Time React Command Center Interface
-- **Explanation**: Web UI built with Vite and React TypeScript running on `localhost:3000` exposing AI Copilot queries and live telemetry.
-- **What to Notice**: Clean dark-mode glassmorphism interface and responsive AI chat integration.
-- **Technology Used**: Vite, React, TypeScript, CSS3, REST APIs.
-
-![React Command Center Web UI](docs/media/final_demo/09_react_command_center.png)
-
----
-
-### 6. Cloud Infrastructure Boundary (Terraform HCL)
 - **Heading**: Google Cloud Platform Infrastructure Boundary
 - **Explanation**: Declarative Terraform HCL definitions for Cloud Run, Cloud Storage Medallion buckets, and BigQuery datasets.
 - **What to Notice**: Honest architecture boundary classification for GCP.
