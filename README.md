@@ -20,7 +20,20 @@ Modern enterprises require robust data infrastructure capable of processing hete
 - **Databricks SQL Synchronization**: 6 Gold sector data marts reconciled against Databricks SQL Warehouse (`1f1403d78bfa0404`) with **0.00% data variance**.
 - **Multi-Tier AI Copilot + RAG**: Intent-based router (`AgenticRouter`) with Google Gemini 2.5 Flash, OxAlpha (`stealth/ox-alpha`) via OpenRouter Gateway (**HTTP 200 Live Verified**), FAISS vector store, and `sqlglot` AST Text-to-SQL security.
 - **Native Apache Superset BI**: Programmatically provisioned via REST APIs with 1 DB, 7 SqlaTable datasets, 9 slice charts (`status=success`), and 7 published dashboards on Docker `localhost:8088`.
-- **Master CI/CD**: 4-job GitHub Actions workflow (**Run #28 SUCCESS**) running Python tests, Vite React build, and multi-stage Docker builds.
+- **Master CI/CD**: 4-job GitHub Actions workflow (**Run #31 SUCCESS**) running Python tests, Vite React build, and multi-stage Docker builds.
+
+---
+
+## 🖼️ Visual Platform & Dashboard Demonstrations
+
+### 1. Apache Superset BI Executive Command Center
+![Apache Superset BI Dashboard](docs/images/superset_dashboard_demo.png)
+
+### 2. React Command Center Web UI
+![React Command Center Web UI](docs/images/react_command_center_ui.png)
+
+### 3. System Architecture Topology
+![System Architecture Diagram](docs/images/platform_architecture_diagram.png)
 
 ---
 
