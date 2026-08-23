@@ -11,6 +11,16 @@ An enterprise-grade, multi-sector Data Engineering, ML/MLOps, BI, and AI Copilot
 
 ---
 
+## 🎥 End-to-End Platform Video Demo & AI Voice Narration
+
+- 🎬 **Demo Video File**: [`docs/media/enterprise_platform_demo_video.mp4`](docs/media/enterprise_platform_demo_video.mp4)
+- 🎙️ **AI Voice Narration File**: [`docs/media/demo_narration.wav`](docs/media/demo_narration.wav)
+
+### 🎙️ Narration Transcript
+> *"Welcome to the Enterprise Multi-Sector Data Engineering and AI Platform demonstration. This platform processes financial, healthcare, clinical, insurance, and retail datasets using a 3-stage PySpark Medallion Lakehouse with 0 percent data variance across Databricks, Apache Superset BI, and multi-tier AI Copilot models using Gemini 2.5 Flash and OxAlpha."*
+
+---
+
 ## 🎯 Business Context & Verified Metrics
 
 Modern enterprises require robust data infrastructure capable of processing heterogeneous datasets, detecting anomalies, providing interactive business intelligence, and exposing natural language AI interfaces securely.
@@ -27,18 +37,23 @@ Modern enterprises require robust data infrastructure capable of processing hete
 ## 🖼️ Visual Platform & Logged-In Dashboard Demonstrations
 
 ### 1. Apache Superset — Executive Command Center Dashboard
+*Displays cross-sector metric values and record processing distribution across financial, healthcare, and retail sectors.*
 ![Apache Superset Executive Dashboard](docs/images/superset_executive_logged_in.png)
 
 ### 2. Apache Superset — Credit Card Fraud Intelligence Dashboard
+*Shows transaction amount distribution and credit card fraud risk score breakdowns.*
 ![Apache Superset Fraud Dashboard](docs/images/superset_fraud_dashboard.png)
 
 ### 3. Apache Superset — Retail Sales & Demand Analytics Dashboard
+*Provides gross revenue breakdown and product demand metrics across product categories.*
 ![Apache Superset Retail Dashboard](docs/images/superset_retail_dashboard.png)
 
 ### 4. React Command Center Web UI
+*Interactive real-time frontend dashboard running on `localhost:3000` exposing AI Copilot queries and system status.*
 ![React Command Center Web UI](docs/images/react_command_center_ui.png)
 
 ### 5. System Architecture Topology
+*End-to-end data flow topology from live external feeds down to PySpark, Databricks, AI Copilot, Superset BI, and CI/CD.*
 ![System Architecture Diagram](docs/images/platform_architecture_diagram.png)
 
 ---
