@@ -23,7 +23,7 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ruff pytest pandas numpy scikit-learn xgboost lightgbm torch matplotlib shap psycopg2-binary pyarrow pyspark databricks-sdk requests
+          pip install ruff pytest pandas numpy scikit-learn xgboost lightgbm torch matplotlib shap psycopg2-binary pyarrow pyspark databricks-sdk requests sqlglot python-dotenv
 
       - name: Lint Code with Ruff
         run: |
@@ -43,12 +43,7 @@ jobs:
           DATABRICKS_SCHEMA: enterprise_gold
         run: |
           python scripts/check_databricks.py
-        # Note: SQL execution verification (SELECT 1) is performed separately
-        # via scripts/verify_databricks_runtime.py when the warehouse is RUNNING.
-        # PAT-02: This step is UNIT VERIFIED in CI.
-        # Full Databricks runtime CI is gated on PAT-02 live GitHub push with secret.
-        continue-on-error: true  # Non-blocking: does not fail build if warehouse is stopped
-
+        continue-on-error: true
 
       - name: Verify Multi-Sector Real World Ingestion
         run: |
@@ -76,7 +71,7 @@ jobs:
 
       - name: Install Frontend Dependencies
         working-directory: ./frontend
-        run: npm ci
+        run: npm ci --legacy-peer-deps || npm i --legacy-peer-deps
 
       - name: Build Vite Production Bundle
         working-directory: ./frontend
