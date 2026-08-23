@@ -52,7 +52,7 @@ The project evaluates every component against a strict 5-stage verification taxo
 
 ### Completed Milestones Summary
 - **Milestone 1–4**: Architecture design, PySpark Medallion lakehouse, schema enforcement, Delta Lake transactional storage. (`RUNTIME VERIFIED`)
-- **Milestone 5**: Multi-sector real-world dataset ingestion & live API feeds (Alpha Vantage, Open-Meteo, Open ExchangeRate, GDELT fallback). (`RUNTIME VERIFIED`)
+- **Milestone 4**: Enterprise AI Copilot + RAG Knowledge Pipeline (`AgenticRouter`, `stealth/ox-alpha` via OpenRouter Gateway returning `LIVE_HTTP_SUCCESS`, AST read-only Text-to-SQL security, FAISS vector search with citations). (`RUNTIME VERIFIED`)
 - **Milestone 6**: Apache Superset BI layer, 7 dashboard manifests exported, automated provisioning engine. (`RUNTIME VERIFIED`)
 - **Milestone 7**: Advanced predictive analytics (XGBoost MAE 12.65, Clinical PR-AUC 0.427, K-Means clustering, Anomaly Queue). (`RUNTIME VERIFIED`)
 - **Milestone 8**: Databricks SQL Warehouse synchronization & 6/6 Gold sector reconciliation. (`RUNTIME VERIFIED`)
