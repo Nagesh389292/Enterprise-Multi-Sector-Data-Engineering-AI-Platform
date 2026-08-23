@@ -240,6 +240,7 @@ def provision():
                 print(f"[SupersetProvisioner] Created Chart: '{cdef['name']}' (ID: {slice_obj.id})")
             else:
                 slice_obj.params = cdef["params"]
+                slice_obj.viz_type = cdef["viz_type"]
                 db.session.commit()
                 print(f"[SupersetProvisioner] Updated Existing Chart: '{cdef['name']}' (ID: {slice_obj.id})")
             created_slices[cdef["name"]] = slice_obj
