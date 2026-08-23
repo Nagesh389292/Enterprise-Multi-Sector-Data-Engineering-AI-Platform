@@ -156,6 +156,8 @@ Apache Superset is natively provisioned using Python REST APIs (`scripts/provisi
 
 A modern React TypeScript single-page application built with Vite (`frontend/`) providing real-time data visualizations, interactive AI Copilot chat interface, and system health status.
 
+![React Command Center Web UI](docs/images/frontend/react_command_center_ui.png)
+
 ---
 
 ## 🚀 CI/CD & DevOps Pipeline
