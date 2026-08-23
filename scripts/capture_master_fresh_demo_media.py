@@ -1,7 +1,5 @@
 import os
 import time
-import requests
-import re
 from PIL import Image, ImageDraw, ImageFont
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -13,11 +11,11 @@ os.makedirs(out_dir, exist_ok=True)
 
 print("=== CAPTURING 13 FRESH REAL DEMO SCREENSHOTS FROM RUNNING SERVICES ===")
 
-# Setup Headless Chrome
+# Setup Headless Chrome with high-resolution viewport
 chrome_options = Options()
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-gpu")
-chrome_options.add_argument("--window-size=1440,900")
+chrome_options.add_argument("--window-size=1600,1000")
 chrome_options.add_argument("--no-sandbox")
 
 driver = webdriver.Chrome(options=chrome_options)
@@ -44,31 +42,25 @@ try:
     driver.save_screenshot(os.path.join(out_dir, "03_ai_copilot.png"))
     print("  -> Saved 03_ai_copilot.png")
 
-    # Log in to Apache Superset via requests session to obtain session cookie
-    print("[Superset Auth] Logging into Apache Superset (http://localhost:8088)...")
-    session = requests.Session()
-    login_url = "http://localhost:8088/login/"
-    resp = session.get(login_url)
+    # 3. Log in to Apache Superset via UI button click
+    print("[Superset Auth] Logging into Apache Superset (http://localhost:8088/login/)...")
+    driver.get("http://localhost:8088/login/")
+    time.sleep(3)
 
-    csrf_match = re.search(r'name="csrf_token" type="hidden" value="([^"]+)"', resp.text)
-    csrf_token = csrf_match.group(1) if csrf_match else ""
+    user_input = driver.find_element(By.ID, "username")
+    user_input.clear()
+    user_input.send_keys("admin")
 
-    session.post(login_url, data={
-        "csrf_token": csrf_token,
-        "username": "admin",
-        "password": "admin"
-    })
+    pass_input = driver.find_element(By.ID, "password")
+    pass_input.clear()
+    pass_input.send_keys("admin")
 
-    session_cookie = session.cookies.get("session")
-    driver.get("http://localhost:8088/")
-    driver.add_cookie({
-        "name": "session",
-        "value": session_cookie,
-        "domain": "localhost",
-        "path": "/"
-    })
+    submit_btn = driver.find_element(By.XPATH, "//button[@type='submit']")
+    submit_btn.click()
+    time.sleep(5)
+    print(f"  -> Logged in successfully! Current URL: {driver.current_url}")
 
-    # Capture all 7 Superset Dashboards
+    # Capture all 7 Superset Dashboards with full chart rendering
     superset_dashboards = [
         ("05_superset_executive.png", 1, "Executive Command Center"),
         ("06_superset_fraud.png", 2, "Credit Card Fraud Intelligence"),
@@ -83,17 +75,17 @@ try:
         url = f"http://localhost:8088/superset/dashboard/{dash_id}/"
         print(f"[{dash_id + 4}/13] Capturing Superset '{title}' from {url}...")
         driver.get(url)
-        time.sleep(5) # Allow rendered charts and KPI metrics to load completely
+        time.sleep(6) # Allow rendered charts and KPI metrics to load completely
         out_path = os.path.join(out_dir, filename)
         driver.save_screenshot(out_path)
-        print(f"  -> Saved {filename}")
+        print(f"  -> Saved {filename} (Size: {os.path.getsize(out_path)} bytes)")
 
 finally:
     driver.quit()
 
 # Function to generate clean high-resolution visual cards for non-UI components (Pipeline, Databricks, CI/CD, Terraform)
 def create_technical_card(filename, title, subtitle, items, bg_color="#0F172A", accent_color="#38BDF8"):
-    w, h = 1440, 900
+    w, h = 1600, 1000
     img = Image.new("RGB", (w, h), bg_color)
     draw = ImageDraw.Draw(img)
 

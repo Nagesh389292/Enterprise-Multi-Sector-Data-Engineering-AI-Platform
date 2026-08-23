@@ -1,12 +1,12 @@
 # 🏛️ Enterprise Multi-Sector Data Engineering, ML/MLOps & AI Platform
 
-[](https://github.com/Nagesh389292/Enterprise-Multi-Sector-Data-Engineering-AI-Platform/actions)
-[](https://www.python.org/)
-[](https://spark.apache.org/)
-[](https://databricks.com/)
-[](https://superset.apache.org/)
-[](https://console.cloud.google.com/)
-[](file:///c:/Users/NAGESH%20REDDY/Desktop/Data%20Analytics/run_tests.py)
+[![CI/CD Master Pipeline](https://github.com/Nagesh389292/Enterprise-Multi-Sector-Data-Engineering-AI-Platform/actions/workflows/ci.yml/badge.svg)](https://github.com/Nagesh389292/Enterprise-Multi-Sector-Data-Engineering-AI-Platform/actions)
+[![Python 3.11](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
+[![PySpark 3.5](https://img.shields.io/badge/PySpark-3.5.0-orange.svg)](https://spark.apache.org/)
+[![Databricks](https://img.shields.io/badge/Databricks-Delta_Lake-red.svg)](https://databricks.com/)
+[![Superset BI](https://img.shields.io/badge/Apache_Superset-4.0-emerald.svg)](https://superset.apache.org/)
+[![GCP Project](https://img.shields.io/badge/GCP_Project-enterprise--data--ai--platform-blue.svg)](https://console.cloud.google.com/)
+[![Master Tests](https://img.shields.io/badge/Master_Tests-71%2F71_PASS-brightgreen.svg)](file:///c:/Users/NAGESH%20REDDY/Desktop/Data%20Analytics/run_tests.py)
 
 **An enterprise-grade, multi-sector Data Engineering, ML/MLOps, BI, and AI Copilot platform built to process, analyze, and visualize financial, healthcare, clinical, insurance, and retail datasets with 0.00% Databricks data variance, 71/71 passing unit tests, and production-grade security standards.**
 
@@ -14,8 +14,8 @@
 
 ## 🎬 Live Project Demonstration (Screen Walkthrough & Muxed AI Voice)
 
-- 🎬 **Complete Live Demo Video (Muxed AAC Audio)**: [`docs/media/enterprise_platform_demo_video.mp4`](docs/media/enterprise_platform_demo_video.mp4) (10.15 MB MP4)
-- 🎙️ **Standalone AI Voice Narration WAV**: [`docs/media/demo_narration.wav`](docs/media/demo_narration.wav) (17.67 MB Audio)
+- 🎬 **Complete Live Demo Video (Muxed AAC Audio)**: [`docs/media/enterprise_platform_demo_video.mp4`](docs/media/enterprise_platform_demo_video.mp4) (11.36 MB MP4)
+- 🎙️ **Standalone AI Voice Narration WAV**: [`docs/media/demo_narration.wav`](docs/media/demo_narration.wav) (17.69 MB Audio)
 - 📐 **Video Technical Specifications**: 1280x720 (720p HD) | Duration: **6m 41s** (401.1s) | Audio Codec: AAC 95kbps | Video Codec: H.264 25fps | Audio Embedded: **YES**
 
 ### 🎙️ AI Voice Storyboard & Storytelling Transcript
@@ -61,7 +61,7 @@
 
 ---
 
-## 📊 Live Superset BI Demonstration
+## 📊 Live Superset BI Demonstration (Authenticated & Rendered)
 
 > The Gold analytical layer is exposed through Apache Superset, providing interactive dashboards for executive monitoring, fraud analytics, banking risk, healthcare utilization, clinical risk, insurance, and retail demand.
 >  
@@ -73,31 +73,31 @@
 > - **Published Dashboards**: 7
 
 ### 1. Executive Command Center
-  
+![Executive Command Center](docs/media/final_demo/05_superset_executive.png)  
 *Provides an executive view of the unified analytical data layer across all 6 sectors.*
 
 ### 2. Credit Card Fraud Intelligence
-  
+![Credit Card Fraud Intelligence](docs/media/final_demo/06_superset_fraud.png)  
 *Provides fraud-related analytics, risk score breakdowns, and transaction anomaly indicators.*
 
 ### 3. Banking Credit Risk Analytics
-  
+![Banking Credit Risk Analytics](docs/media/final_demo/07_superset_banking.png)  
 *Provides default probability breakdown across loan purpose categories and debt-to-income risk tiers.*
 
 ### 4. Healthcare Capacity & Utilization
-  
+![Healthcare Capacity & Utilization](docs/media/final_demo/08_superset_healthcare.png)  
 *Provides hospital bed occupancy telemetry and capacity utilization metrics.*
 
 ### 5. Clinical EHR Readmission Risk
-  
+![Clinical EHR Readmission Risk](docs/media/final_demo/09_superset_readmission.png)  
 *Provides 30-day patient readmission risk breakdown by patient age groups and hospitalization counts.*
 
 ### 6. Insurance Claims Fraud Analytics
-  
+![Insurance Claims Fraud Analytics](docs/media/final_demo/10_superset_insurance.png)  
 *Provides analytics on claim incident types and fraud likelihood indicators.*
 
 ### 7. Retail Sales & Product Demand
-  
+![Retail Sales & Product Demand](docs/media/final_demo/11_superset_retail.png)  
 *Provides sales, revenue, and product-demand analytics across retail categories.*
 
 ---
@@ -105,27 +105,27 @@
 ## 💻 Operational Interfaces & Infrastructure Boundary
 
 ### React Command Center Web UI
-  
+![React Command Center](docs/media/final_demo/01_react_command_center.png)  
 *Web UI built with Vite and React TypeScript running live on localhost:3000.*
 
 ### PySpark Medallion Data Engineering Pipeline
-  
+![PySpark Medallion Data Engineering Pipeline](docs/media/final_demo/02_data_pipeline.png)  
 *Three-stage Bronze -> Silver -> Gold pipeline with schema validation and data quarantine.*
 
 ### AI Copilot Gateway & AST Security
-  
+![AI Copilot Gateway & AST Security](docs/media/final_demo/03_ai_copilot.png)  
 *Natural language interface powered by Gemini 2.5 Flash, OxAlpha via OpenRouter Gateway, and AST SQL read-only security parser.*
 
 ### Databricks Delta Lake Synchronization & Reconciliation
-  
+![Databricks Delta Lake Synchronization & Reconciliation](docs/media/final_demo/04_databricks.png)  
 *6/6 sector Gold data mart reconciliation against Databricks SQL Warehouse 1f1403d78bfa0404 with 0.00% data variance.*
 
 ### Master CI/CD Pipeline (GitHub Actions Run #44 Success)
-  
+![GitHub Actions Master CI/CD Pipeline](docs/media/final_demo/12_github_actions.png)  
 *Four-job GitHub Actions workflow executing 71/71 master unit tests on every push to main.*
 
 ### Cloud Infrastructure Boundary (Terraform HCL)
-  
+![Cloud Infrastructure Boundary](docs/media/final_demo/13_terraform_boundary.png)  
 *Declarative Terraform HCL definitions for GCP Cloud Run, Cloud Storage Medallion buckets, and BigQuery datasets.*
 
 ---
