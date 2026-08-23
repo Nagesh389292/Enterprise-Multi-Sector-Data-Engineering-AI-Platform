@@ -39,7 +39,15 @@ frontend/.vite/
 # Security & System Exclusions
 *.log
 *.db
+*.duckdb
 __pycache__
 node_modules
 dist
 models/*.pkl
+audit_*.json
+verify_*.json
+benchmarks_report.json
+load_test_report.json
+npm_audit_report.json
+pip_audit_report.json
+security_audit_report.json
