@@ -67,7 +67,7 @@ The project evaluates every component against a strict 5-stage verification taxo
 
 ### Gate PAT-02: GitHub Actions CI/CD Pipeline Execution
 - **Status**: 🟢 `RUNTIME VERIFIED` (CLOSED)
-- **Empirical Evidence**: Master workflow [.github/workflows/ci.yml](file:///c:/Users/NAGESH%20REDDY/Desktop/Data%20Analytics/.github/workflows/ci.yml) executed live on GitHub cloud runner (Run #24 / `32641655707`) for commit `2e6e3cd`. All 4 jobs (`test-python`, `build-frontend`, `docker-build`, `deploy-gcp-cloud-run`) completed with **`conclusion=success`** (0 failures, 0 errors).
+- **Empirical Evidence**: Master workflow [.github/workflows/ci.yml](file:///c:/Users/NAGESH%20REDDY/Desktop/Data%20Analytics/.github/workflows/ci.yml) executed live on GitHub cloud runner (Run #27 / `32653264877`) for commit `f032846`. All 4 jobs (`test-python`, `build-frontend`, `docker-build`, `deploy-gcp-cloud-run`) completed with **`conclusion=success`** (0 failures, 0 errors).
 
 ### Gate PAT-03: GCP Cloud Run & BigQuery Deployment
 - **Status**: 🔴 `IMPLEMENTED / IaC DECLARED` (OPEN)
