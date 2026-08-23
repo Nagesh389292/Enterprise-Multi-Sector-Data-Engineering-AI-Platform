@@ -12,50 +12,56 @@
 
 ---
 
-## 🎬 Full Live Project Demonstration (8-Minute Screen Walkthrough & Muxed AI Voice)
+## 🎬 Live Project Demonstration (Screen Walkthrough & Muxed AI Voice)
 
-- 🎬 **Complete Live Demo Video (Muxed AAC Audio)**: [`docs/media/enterprise_platform_demo_video.mp4`](docs/media/enterprise_platform_demo_video.mp4) (14.11 MB MP4)
-- 🎙️ **Standalone AI Voice Narration WAV**: [`docs/media/demo_narration.wav`](docs/media/demo_narration.wav) (22.10 MB Audio)
-- 📐 **Video Technical Specifications**: 1280x720 (720p HD) | Duration: **8m 21s** (501.5s) | Audio Codec: AAC 95kbps | Video Codec: H.264 25fps | Audio Embedded: **YES**
+- 🎬 **Complete Live Demo Video (Muxed AAC Audio)**: [`docs/media/enterprise_platform_demo_video.mp4`](docs/media/enterprise_platform_demo_video.mp4) (10.15 MB MP4)
+- 🎙️ **Standalone AI Voice Narration WAV**: [`docs/media/demo_narration.wav`](docs/media/demo_narration.wav) (17.67 MB Audio)
+- 📐 **Video Technical Specifications**: 1280x720 (720p HD) | Duration: **6m 41s** (401.1s) | Audio Codec: AAC 95kbps | Video Codec: H.264 25fps | Audio Embedded: **YES**
 
 ### 🎙️ AI Voice Storyboard & Storytelling Transcript
 
-> **00:00 — Section 1: Project & Business Problem**  
-> *"Welcome to this engineering walkthrough of the Enterprise Multi-Sector Data Engineering, Machine Learning, Business Intelligence, and AI Copilot Platform. Why do modern enterprise environments need a multi-sector data engineering and AI platform? In production environments, data is fragmented across organizational silos—credit card processing, banking loan operations, healthcare bed capacity telemetry, clinical EHR readmission records, insurance claims, and retail sales. To make real-time operational decisions, engineering teams require unified ingestion, strict data quality controls, and secure natural language interfaces without compromising governance or security. This platform unifies six distinct industry sectors into a single production-grade lakehouse."*  
+> **00:00 — Section 1: Operational Command Center**  
+> *"Welcome to this engineering walkthrough of the Enterprise Multi-Sector Data Engineering, Machine Learning, Business Intelligence, and AI Copilot Platform. This is the operational command center for the enterprise data and AI platform, running live on React port 3000. In production environments, data is fragmented across organizational silos—credit card processing, banking loan operations, healthcare bed capacity telemetry, clinical EHR readmission records, insurance claims, and retail sales. To make real-time operational decisions, engineering teams require unified ingestion, strict data quality controls, and secure natural language interfaces without compromising governance or security."*  
 >  
-> **00:45 — Section 2: End-to-End System Architecture**  
-> *"Let's trace the complete data journey. External telemetry streams from Alpha Vantage market data, OpenAQ air quality feeds, and economic indicators enter a three-stage PySpark Medallion Lakehouse. Raw data lands in Bronze Parquet storage, is cleaned and schema-validated in Silver with malformed records routed to quarantine, and is aggregated into Gold sector data marts. These Gold marts synchronize to Databricks Delta Lake, PostgreSQL, SQLite, and Apache Superset BI. User natural language queries pass through an Agentic Router to Google Gemini 2.5 Flash, OxAlpha via OpenRouter Gateway, or deterministic fallbacks, guarded by an AST SQL security parser before hitting the analytics engine."*  
+> **00:45 — Section 2: Data Engineering & PySpark Medallion Lakehouse**  
+> *"In the Data Engineering core, raw telemetry streams enter a three-stage PySpark Medallion Lakehouse. Raw data lands in Bronze Parquet storage with UUID primary keys and metadata provenance. The Silver stage enforces schema validation rules; records failing quality assertions are isolated in data quarantine for compliance auditing. Gold data marts aggregate domain key performance indicators across credit fraud, banking risk, hospital capacity, clinical readmissions, insurance fraud, and retail demand."*  
 >  
-> **01:30 — Section 3: Data Engineering & PySpark Medallion Lakehouse**  
-> *"In the Data Engineering core, raw data enters Bronze storage attached with ingestion timestamps, metadata provenance, and UUID primary keys. The Silver stage enforces schema validation rules; records failing quality assertions are isolated in data quarantine for compliance auditing. Gold data marts summarize domain key performance indicators—credit card fraud scores, banking default risks, hospital bed occupancy rates, clinical readmission risks, insurance fraud probabilities, and retail gross revenue totals."*  
+> **01:40 — Section 3: Multi-Tier AI Copilot Gateway & AST Security**  
+> *"Now the platform moves from analytics to natural language interaction. A business user does not need to write SQL. They can simply ask a business question in natural language, such as: Which sector currently shows the highest risk according to available analytics? The Agentic Router prioritizes Google Gemini 2.5 Flash as Tier 1, OxAlpha via OpenRouter Gateway as Tier 2 with live HTTP 200 verification, and an offline deterministic analytics engine as Tier 3 fallback. Legacy Ollama daemons have been completely purged. To guarantee security, every generated Text-to-SQL query passes through a sqlglot AST parser that asserts the query root is strictly a SELECT statement, preventing SQL injection, DDL, or DML mutations."*  
 >  
-> **02:30 — Section 4: Databricks SQL Synchronization & Reconciliation**  
+> **02:45 — Section 4: Databricks SQL Synchronization & Reconciliation**  
 > *"The critical engineering capability here is not simply loading data into Databricks. The platform actively verifies that local Gold data marts and Databricks Delta tables agree. Automated reconciliation scripts query Databricks SQL Warehouse 1f1403d78bfa0404 to compare row counts and metric totals. Across all six sectors, the reconciliation achieved 100 percent row matching and exact metric alignment, confirming 0.00 percent data variance across the lakehouse."*  
 >  
-> **03:20 — Section 5: Machine Learning & MLOps Suite**  
-> *"Beyond static analytics, the predictive analytics engine turns this data platform into an intelligence platform. We train multi-sector models across XGBoost, LightGBM, Random Forest, Logistic Regression, and PyTorch Autoencoders. Models are versioned in the MLflow model registry with champion model selection. Explainable AI is powered by SHAP TreeExplainer, revealing the top 3 driver reasons behind every flagged anomaly, while Population Stability Index continuously monitors feature distribution drift over time."*  
+> **03:30 — Section 5: Apache Superset BI — Executive Command Center**  
+> *"Now we move into the business intelligence layer, running live on Docker port 8088. This Executive Command Center dashboard exposes the unified analytical Gold layer through interactive visualizations, displaying cross-sector record distributions without error boxes."*  
 >  
-> **04:10 — Section 6: Multi-Tier AI Copilot Gateway & AST Security**  
-> *"Now the platform moves from analytics to natural language interaction. A business user does not need to write SQL. They can simply ask a question in natural language, such as: Which sector currently shows the highest risk according to available analytics? The Agentic Router prioritizes Google Gemini 2.5 Flash as Tier 1, OxAlpha via OpenRouter Gateway as Tier 2 with live HTTP 200 verification, and an offline deterministic analytics engine as Tier 3 fallback. Legacy Ollama daemons have been completely purged. To guarantee security, every generated Text-to-SQL query passes through a sqlglot AST parser that asserts the query root is strictly a SELECT statement, preventing SQL injection, DDL, or DML mutations."*  
+> **03:55 — Section 6: Apache Superset BI — Credit Card Fraud Intelligence**  
+> *"Next is the Credit Card Fraud Intelligence dashboard, which provides visibility into transaction amounts, fraud risk score breakdowns, and risk category distributions across low, medium, and high risk tiers."*  
 >  
-> **05:10 — Section 7: Apache Superset Business Intelligence Layer (75 Seconds)**  
-> *"Now let's move from the operational application to the business intelligence layer. Gold analytical data is exposed through Apache Superset running live on Docker port 8088, provisioned programmatically with 1 database connection, 7 SqlaTable datasets, 9 slice charts, and 7 published dashboards. Here we can see the Executive Command Center, rendering unified cross-sector distribution metrics. Next is the Credit Card Fraud Intelligence dashboard, allowing analysts to examine fraud risk score breakdowns. The Retail Demand dashboard provides visibility into sales volume and gross revenue totals across product categories. Every dashboard renders rendered charts and KPI metrics without visualization errors."*  
+> **04:20 — Section 7: Apache Superset BI — Banking Credit Risk Analytics**  
+> *"The Banking Credit Risk Analytics dashboard details default probability distributions across loan purpose categories and debt-to-income risk tiers."*  
 >  
-> **06:25 — Section 8: React Command Center Web Application**  
-> *"For live operational monitoring, the React TypeScript Command Center provides an interactive web interface running on port 3000. Users can type natural language queries into the AI Copilot, view real-time streaming telemetry, monitor sector key performance indicators, and trigger lakehouse runs directly from the browser."*  
+> **04:40 — Section 8: Apache Superset BI — Healthcare Capacity & Utilization**  
+> *"The Healthcare Capacity dashboard displays state-level hospital bed occupancy telemetry and capacity utilization metrics."*  
 >  
-> **07:15 — Section 9: Master CI/CD Pipeline & Testing**  
-> *"DevOps automation is enforced by a four-job GitHub Actions workflow executing on every push to main. The master test runner run_tests.py executes 71 automated unit tests in under 260 seconds with 0 failures and 0 errors. The CI pipeline validates Python logic, Vite React frontend compilation, and multi-stage Docker container builds."*  
+> **05:00 — Section 9: Apache Superset BI — Clinical EHR Readmission Risk**  
+> *"The Clinical EHR Readmission Risk dashboard breaks down 30-day patient readmission risks by age groups and prior hospitalization counts."*  
 >  
-> **07:55 — Section 10: Infrastructure Boundary & Google Cloud Platform**  
-> *"To be completely clear and honest about the infrastructure boundary: Google Cloud Platform resources for project enterprise-data-ai-platform are fully declared using Terraform HCL for Cloud Run services, Cloud Storage Medallion buckets, and BigQuery datasets. However, live Cloud Run hosting was intentionally not executed because the project currently operates without an active GCP billing setup."*  
+> **05:20 — Section 10: Apache Superset BI — Insurance Claims Fraud Analytics**  
+> *"The Insurance Claims dashboard provides analytics on claim incident types and fraud likelihood indicators."*  
 >  
-> **08:15 — Section 11: Final Summary & Official Architecture Classification**  
-> *"In summary, this platform combines PySpark data engineering, Databricks Delta Lake synchronization, predictive machine learning, multi-tier generative AI security, native BI dashboards, and continuous integration into one unified architecture. The project is officially classified as an Enterprise-Grade Production-Like Prototype and Release Candidate with 71 passing tests and 0.00 percent Databricks variance."*
+> **05:40 — Section 11: Apache Superset BI — Retail Sales & Product Demand**  
+> *"The Retail Sales dashboard provides visibility into gross revenue totals and product sales volume across retail categories."*  
+>  
+> **06:05 — Section 12: GitHub Actions Master CI/CD Pipeline**  
+> *"The platform uses GitHub Actions to automatically validate the application through its continuous integration pipeline. The master test runner run_tests.py executes 71 automated unit tests in under 260 seconds with 0 failures and 0 errors."*  
+>  
+> **06:40 — Section 13: Cloud Infrastructure Boundary & Final Classification**  
+> *"The GCP deployment layer is defined through Terraform HCL for Cloud Run, Cloud Storage, and BigQuery, but live Cloud Run deployment is intentionally not claimed because billing-backed GCP deployment is unavailable. In summary, this platform combines PySpark data engineering, Databricks Delta Lake synchronization, predictive machine learning, multi-tier generative AI security, native BI dashboards, and continuous integration into one unified architecture. The project is officially classified as an Enterprise-Grade Production-Like Prototype and Release Candidate with 71 passing tests and 0.00 percent Databricks variance."*
 
 ---
 
-## 📊 Apache Superset Business Intelligence
+## 📊 Live Superset BI Demonstration
 
 > The Gold analytical layer is exposed through Apache Superset, providing interactive dashboards for executive monitoring, fraud analytics, banking risk, healthcare utilization, clinical risk, insurance, and retail demand.
 >  
@@ -66,179 +72,61 @@
 > - **Slice Charts**: 9 native pie and table plugins (`status=success`)
 > - **Published Dashboards**: 7
 
-### 1. Executive Command Center Dashboard
-- **What to Notice**: Cross-sector metric breakdown and processing volume distribution across all 6 sectors without error boxes.
-- **Technology Used**: Apache Superset 4.0, SQLite / PostgreSQL Gold Data Marts, Docker.
+### 1. Executive Command Center
+![Executive Command Center](docs/media/final_demo/05_superset_executive.png)  
+*Provides an executive view of the unified analytical data layer across all 6 sectors.*
 
-![Executive Command Center Dashboard](docs/media/final_demo/superset/01_superset_executive.png)
+### 2. Credit Card Fraud Intelligence
+![Credit Card Fraud Intelligence](docs/media/final_demo/06_superset_fraud.png)  
+*Provides fraud-related analytics, risk score breakdowns, and transaction anomaly indicators.*
 
----
+### 3. Banking Credit Risk Analytics
+![Banking Credit Risk Analytics](docs/media/final_demo/07_superset_banking.png)  
+*Provides default probability breakdown across loan purpose categories and debt-to-income risk tiers.*
 
-### 2. Credit Card Fraud Intelligence Dashboard
-- **What to Notice**: Transaction risk score distribution (LOW, MEDIUM, HIGH risk tiers) and anomaly velocity metrics.
-- **Technology Used**: Apache Superset 4.0, PySpark Gold Data Marts.
+### 4. Healthcare Capacity & Utilization
+![Healthcare Capacity & Utilization](docs/media/final_demo/08_superset_healthcare.png)  
+*Provides hospital bed occupancy telemetry and capacity utilization metrics.*
 
-![Credit Card Fraud Intelligence Dashboard](docs/media/final_demo/superset/02_superset_fraud.png)
+### 5. Clinical EHR Readmission Risk
+![Clinical EHR Readmission Risk](docs/media/final_demo/09_superset_readmission.png)  
+*Provides 30-day patient readmission risk breakdown by patient age groups and hospitalization counts.*
 
----
+### 6. Insurance Claims Fraud Analytics
+![Insurance Claims Fraud Analytics](docs/media/final_demo/10_superset_insurance.png)  
+*Provides analytics on claim incident types and fraud likelihood indicators.*
 
-### 3. Banking Credit Risk Analytics Dashboard
-- **What to Notice**: Loan default probability breakdown across debt-to-income tiers and loan purpose categories.
-- **Technology Used**: Apache Superset 4.0, Gold Data Marts.
-
-![Banking Credit Risk Analytics Dashboard](docs/media/final_demo/superset/03_superset_banking.png)
-
----
-
-### 4. Healthcare Capacity & Utilization Dashboard
-- **What to Notice**: State-level hospital bed occupancy and capacity utilization telemetry.
-- **Technology Used**: Apache Superset 4.0, Open Government Data (OGD) Marts.
-
-![Healthcare Capacity Dashboard](docs/media/final_demo/superset/04_superset_healthcare.png)
+### 7. Retail Sales & Product Demand
+![Retail Sales & Product Demand](docs/media/final_demo/11_superset_retail.png)  
+*Provides sales, revenue, and product-demand analytics across retail categories.*
 
 ---
 
-### 5. Clinical EHR Readmission Risk Dashboard
-- **What to Notice**: 30-day patient readmission risk breakdown across age groups and prior hospitalization counts.
-- **Technology Used**: Apache Superset 4.0, Clinical EHR Gold Data Marts.
+## 💻 Operational Interfaces & Infrastructure Boundary
 
-![Clinical Readmission Risk Dashboard](docs/media/final_demo/superset/05_superset_readmission.png)
+### React Command Center Web UI
+![React Command Center](docs/media/final_demo/01_react_command_center.png)  
+*Web UI built with Vite and React TypeScript running live on localhost:3000.*
 
----
+### PySpark Medallion Data Engineering Pipeline
+![PySpark Medallion Data Engineering Pipeline](docs/media/final_demo/02_data_pipeline.png)  
+*Three-stage Bronze -> Silver -> Gold pipeline with schema validation and data quarantine.*
 
-### 6. Insurance Claims Fraud Analytics Dashboard
-- **What to Notice**: Incident type fraud probability and reported loss distribution metrics.
-- **Technology Used**: Apache Superset 4.0, Insurance Claims Gold Data Marts.
+### AI Copilot Gateway & AST Security
+![AI Copilot Gateway & AST Security](docs/media/final_demo/03_ai_copilot.png)  
+*Natural language interface powered by Gemini 2.5 Flash, OxAlpha via OpenRouter Gateway, and AST SQL read-only security parser.*
 
-![Insurance Claims Fraud Dashboard](docs/media/final_demo/superset/06_superset_insurance.png)
+### Databricks Delta Lake Synchronization & Reconciliation
+![Databricks Delta Lake Synchronization & Reconciliation](docs/media/final_demo/04_databricks.png)  
+*6/6 sector Gold data mart reconciliation against Databricks SQL Warehouse 1f1403d78bfa0404 with 0.00% data variance.*
 
----
+### Master CI/CD Pipeline (GitHub Actions Run #44 Success)
+![GitHub Actions Master CI/CD Pipeline](docs/media/final_demo/12_github_actions.png)  
+*Four-job GitHub Actions workflow executing 71/71 master unit tests on every push to main.*
 
-### 7. Retail Sales & Product Demand Dashboard
-- **What to Notice**: Gross revenue totals and product sales volume distribution across retail categories.
-- **Technology Used**: Apache Superset 4.0, Retail Sales Gold Data Marts.
-
-![Retail Demand Dashboard](docs/media/final_demo/superset/07_superset_retail.png)
-
----
-
-## 📊 Key Verified Metrics
-
-- **71/71 Automated Master Unit Tests Passing**: 100% test suite execution across 14 core modules (`run_tests.py`).
-- **Databricks SQL Synchronization**: **6/6 Gold sector data marts reconciled against Databricks SQL Warehouse (`1f1403d78bfa0404`) with 0.00% data variance**.
-- **PySpark Medallion Lakehouse**: 3-stage Bronze $\rightarrow$ Silver $\rightarrow$ Gold pipeline with schema validation and quarantine routing.
-- **Multi-Tier AI Copilot Gateway**: Google Gemini 2.5 Flash (Tier 1) $\rightarrow$ OxAlpha (`stealth/ox-alpha`) via OpenRouter Gateway (**HTTP 200 Live Verified**) $\rightarrow$ Deterministic Engine (Tier 3 Fallback).
-- **Apache Superset BI Layer**: Programmatically provisioned via REST APIs with 1 DB (`Enterprise Analytics Engine`), 7 SqlaTable datasets, 9 slice charts (`status=success`), and 7 published dashboards on Docker `localhost:8088`.
-- **Master CI/CD Pipeline**: 4-job GitHub Actions workflow (**Run #36 SUCCESS**) running Python tests, Vite React build, and multi-stage Docker builds.
-
----
-
-## 📐 End-to-End System Architecture
-
-```
-                  LIVE EXTERNAL DATA & EVENT STREAMING
-           (Alpha Vantage, OpenAQ, RBI Macro, Redis Streams)
-                                │
-                                ▼
-                   PYSPARK MEDALLION LAKEHOUSE
-       Bronze (Raw Ingestion) ➔ Silver (Cleaned) ➔ Gold (Aggregated Marts)
-                                │
-        ┌───────────────────────┼───────────────────────┐
-        ▼                       ▼                       ▼
-DATABRICKS DELTA LAKE   POSTGRESQL / SQLITE      APACHE SUPERSET BI
-(0.00% Variance Sync)   (Gold Data Marts)     (7 Dashboards, 9 Charts)
-        │                       │                       │
-        └───────────────────────┼───────────────────────┘
-                                ▼
-                   ENTERPRISE AI COPILOT & RAG
-             Agentic Router ➔ AST Read-Only SQL Security
-        Gemini 2.5 Flash / OxAlpha (OpenRouter) ➔ Fallback
-```
-
----
-
-## ⚙️ How the Platform Works
-
-1. **Ingestion & Streaming**: External APIs (Alpha Vantage, OpenAQ, RBI Economic Indicators) and Redis Streams publish real-world telemetry into raw storage.
-2. **PySpark Medallion ETL**: Data is ingested into Bronze Parquet files, cleaned and schema-validated in Silver with malformed records routed to `data/quarantine/`, and summarized into Gold analytical data marts.
-3. **Databricks Synchronization**: Gold data marts are pushed to a Databricks SQL Warehouse and verified via automated row-count and checksum reconciliation.
-4. **Machine Learning & MLOps**: XGBoost, LightGBM, Random Forest, and PyTorch models train on Gold datasets to generate fraud scores, credit default probabilities, and readmission risk scores with SHAP explainability.
-5. **AI Gateway & RAG**: User queries enter `AgenticRouter` to select between SQL Analytics, RAG Knowledge Base search (FAISS + HuggingFace embeddings), or ML Explanation.
-6. **AST SQL Security**: `sqlglot` AST parser validates LLM-generated SQL queries to enforce strict read-only `SELECT` permissions.
-7. **Business Intelligence & Command Center**: Superset displays interactive charts while a React TypeScript Command Center provides a real-time management dashboard.
-
----
-
-## 🔄 Data Engineering & PySpark Medallion Lakehouse
-
-The data engineering core processes 6 distinct industry sectors:
-- **Credit Card Fraud**: Transaction amounts, risk scoring, and velocity metrics.
-- **Banking Credit Risk**: Loan purpose, debt-to-income ratio, and default probabilities.
-- **Healthcare OGD**: State-level hospital bed occupancy and capacity utilization.
-- **Clinical EHR Readmission**: Patient demographics, prior hospitalizations, and 30-day readmission risk.
-- **Insurance Claims**: Claim types, reported losses, and fraud likelihood.
-- **Retail Demand**: Product categories, sales volume, and gross revenue.
-
----
-
-## 🧱 Databricks SQL Synchronization & Reconciliation
-
-Gold data marts are automatically synchronized against a Databricks Delta Lake SQL Warehouse (`1f1403d78bfa0404`). Automated reconciliation scripts query both local Gold Parquet stores and Databricks tables to assert row counts and metric sums.
-
-![Databricks Reconciliation Report](docs/media/final_demo/03_databricks_reconciliation.png)
-
----
-
-## 🤖 Machine Learning & MLOps Suite
-
-- **Model Registry**: Champion model selection across XGBoost, LightGBM, Random Forest, Logistic Regression, and PyTorch Autoencoders (`ml/models/champion_registry.json`).
-- **Explainability**: `shap.TreeExplainer` generates top 3 explanation reasons for every transaction anomaly.
-- **Drift Monitoring**: Population Stability Index (PSI) and Kolmogorov-Smirnov (KS) tests track distribution shifts in `ml/drift_monitor.py`.
-
-![MLOps Suite](docs/media/final_demo/04_ml_mlops.png)
-
----
-
-## 🧠 Multi-Tier AI Copilot Gateway & AST Security
-
-The natural language AI gateway features a resilient fallback chain:
-1. **Tier 1 (Primary)**: Google Gemini 2.5 Flash API (`GEMINI_API_KEY`).
-2. **Tier 2 (Secondary)**: OxAlpha (`stealth/ox-alpha`) via OpenRouter Gateway (**HTTP 200 Live Verified**).
-3. **Tier 3 (Fallback)**: Offline Deterministic Analytics & Rule Engine.
-4. **Ollama Daemon**: Purged and completely removed (0 active references).
-
-![AI Gateway & Copilot UI](docs/media/final_demo/05_ai_copilot.png)
-
----
-
-## 💻 React Command Center Web Frontend
-
-A modern React TypeScript single-page application built with Vite (`frontend/`) providing real-time data visualizations, interactive AI Copilot chat interface, and system health status.
-
-![React Command Center Web UI](docs/media/final_demo/09_react_command_center.png)
-
----
-
-## 🚀 CI/CD & DevOps Pipeline
-
-GitHub Actions master workflow (`.github/workflows/ci.yml`) executes on every push to `main` across 4 automated jobs:
-1. `test-python`: Runs PySpark, Databricks, ML, and AI test suite.
-2. `build-frontend`: Builds production Vite React bundle.
-3. `docker-build`: Builds backend and frontend multi-stage Docker container images.
-4. `deploy-gcp-cloud-run`: Checks GCP deployment credentials.
-
-![Master CI/CD Pipeline](docs/media/final_demo/10_github_actions.png)
-
----
-
-## 🖼️ Cloud Infrastructure Boundary (Terraform HCL)
-
-- **Heading**: Google Cloud Platform Infrastructure Boundary
-- **Explanation**: Declarative Terraform HCL definitions for Cloud Run, Cloud Storage Medallion buckets, and BigQuery datasets.
-- **What to Notice**: Honest architecture boundary classification for GCP.
-- **Technology Used**: Google Cloud Platform, Terraform HCL.
-
-![Terraform Cloud Boundary](docs/media/final_demo/11_terraform_boundary.png)
+### Cloud Infrastructure Boundary (Terraform HCL)
+![Cloud Infrastructure Boundary](docs/media/final_demo/13_terraform_boundary.png)  
+*Declarative Terraform HCL definitions for GCP Cloud Run, Cloud Storage Medallion buckets, and BigQuery datasets.*
 
 ---
 
