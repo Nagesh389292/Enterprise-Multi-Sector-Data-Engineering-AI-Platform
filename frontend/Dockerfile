@@ -4,7 +4,7 @@ FROM node:20-alpine as build-stage
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm ci
+RUN npm ci --legacy-peer-deps || npm i --legacy-peer-deps
 
 COPY . .
 RUN npm run build
