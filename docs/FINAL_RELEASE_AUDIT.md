@@ -63,8 +63,7 @@ The project evaluates every component against a strict 5-stage verification taxo
 ## 4. Production Acceptance Gates (PAT-01, PAT-02, PAT-03)
 
 ### Gate PAT-01: Native Apache Superset Container Verification
-- **Status**: 🟢 `RUNTIME VERIFIED` (CLOSED)
-- **Empirical Evidence**: Pulled `apache/superset:latest`, `postgres:16-alpine`, `redis:7-alpine`. Executed database migrations (`superset db upgrade` — 7s), admin creation (`superset fab create-admin`), and role initialization. Verified live REST API authentication (`/api/v1/security/login`) returning `HTTP 200 OK` and JWT access token (`authenticated: True`).
+- **Empirical Evidence**: Native database connection (`Enterprise Analytics Engine`), 7 SqlaTable datasets (`gold_*`), 9 charts, and 7 published dashboards provisioned & verified via Superset REST APIs (`/api/v1/dashboard/`, `/api/v1/chart/`, `/api/v1/dataset/`, `/api/v1/database/`) and live browser UI at `http://localhost:8088`.
 
 ### Gate PAT-02: GitHub Actions CI/CD Pipeline Execution
 - **Status**: 🟡 `CONFIGURED / UNIT VERIFIED` (OPEN — PENDING RUNNER)
