@@ -2,14 +2,16 @@ name: Enterprise Intelligence Platform CI/CD
 
 on:
   push:
-    branches: [ main, master ]
+    branches: [ "main", "master" ]
   pull_request:
-    branches: [ main, master ]
+    branches: [ "main", "master" ]
 
 jobs:
   test-python:
     name: Run Python Test Suite & Audits
     runs-on: ubuntu-latest
+    env:
+      DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -34,9 +36,8 @@ jobs:
           python run_tests.py
 
       - name: Databricks Configuration Health Check
-        if: secrets.DATABRICKS_TOKEN != ''
+        if: env.DATABRICKS_TOKEN != ''
         env:
-          DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
           DATABRICKS_HOST: https://dbc-988b03b0-c952.cloud.databricks.com
           DATABRICKS_WAREHOUSE_ID: 1f1403d78bfa0404
           DATABRICKS_CATALOG: workspace
@@ -109,22 +110,24 @@ jobs:
     needs: docker-build
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    env:
+      GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Authenticate to Google Cloud
-        if: secrets.GCP_SA_KEY != ''
+        if: env.GCP_SA_KEY != ''
         uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SA_KEY }}
 
       - name: Set up Cloud SDK
-        if: secrets.GCP_SA_KEY != ''
+        if: env.GCP_SA_KEY != ''
         uses: google-github-actions/setup-gcloud@v2
 
       - name: Deploy to Cloud Run
-        if: secrets.GCP_SA_KEY != ''
+        if: env.GCP_SA_KEY != ''
         run: |
           gcloud run deploy enterprise-platform-api \
             --image gcr.io/enterprise-data-ai-platform/enterprise-backend:latest \
@@ -133,6 +136,6 @@ jobs:
             --allow-unauthenticated
 
       - name: GCP Credentials Missing Notice
-        if: secrets.GCP_SA_KEY == ''
+        if: env.GCP_SA_KEY == ''
         run: |
           echo "[GCP Deployment] GCP_SA_KEY secret not configured on GitHub Repository. Cloud Run deployment pending live secret."
