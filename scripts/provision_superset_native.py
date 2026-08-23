@@ -117,10 +117,10 @@ def provision():
             # Cross-Sector Summary Charts
             {
                 "name": "Cross-Sector Metric Values",
-                "viz_type": "bar",
+                "viz_type": "table",
                 "table": "gold_multi_sector_summary",
                 "params": json.dumps({
-                    "viz_type": "bar",
+                    "viz_type": "table",
                     "datasource": f"{dataset_map['gold_multi_sector_summary'].id}__table",
                     "metrics": ["primary_metric_value"],
                     "groupby": ["sector"],
@@ -152,10 +152,10 @@ def provision():
             },
             {
                 "name": "Transaction Amount vs Fraud Score",
-                "viz_type": "bar",
+                "viz_type": "table",
                 "table": "gold_credit_card",
                 "params": json.dumps({
-                    "viz_type": "bar",
+                    "viz_type": "table",
                     "datasource": f"{dataset_map['gold_credit_card'].id}__table",
                     "metrics": ["amount_usd"],
                     "groupby": ["risk_level"]
@@ -164,10 +164,10 @@ def provision():
             # Banking Charts
             {
                 "name": "Banking Default Rate by Purpose",
-                "viz_type": "bar",
+                "viz_type": "table",
                 "table": "gold_banking_loan_risk",
                 "params": json.dumps({
-                    "viz_type": "bar",
+                    "viz_type": "table",
                     "datasource": f"{dataset_map['gold_banking_loan_risk'].id}__table",
                     "metrics": ["default_risk_score"],
                     "groupby": ["loan_purpose"]
@@ -176,10 +176,10 @@ def provision():
             # Healthcare Charts
             {
                 "name": "Healthcare Bed Occupancy by State",
-                "viz_type": "bar",
+                "viz_type": "table",
                 "table": "gold_healthcare_ogd",
                 "params": json.dumps({
-                    "viz_type": "bar",
+                    "viz_type": "table",
                     "datasource": f"{dataset_map['gold_healthcare_ogd'].id}__table",
                     "metrics": ["bed_occupancy_pct"],
                     "groupby": ["state"]
@@ -188,10 +188,10 @@ def provision():
             # Clinical Charts
             {
                 "name": "Clinical Readmission Risk by Age Group",
-                "viz_type": "bar",
+                "viz_type": "table",
                 "table": "gold_clinical_readmission",
                 "params": json.dumps({
-                    "viz_type": "bar",
+                    "viz_type": "table",
                     "datasource": f"{dataset_map['gold_clinical_readmission'].id}__table",
                     "metrics": ["readmission_risk"],
                     "groupby": ["age_group"]
@@ -200,10 +200,10 @@ def provision():
             # Insurance Claims Charts
             {
                 "name": "Insurance Fraud Probability by Incident Type",
-                "viz_type": "bar",
+                "viz_type": "table",
                 "table": "gold_insurance_claims",
                 "params": json.dumps({
-                    "viz_type": "bar",
+                    "viz_type": "table",
                     "datasource": f"{dataset_map['gold_insurance_claims'].id}__table",
                     "metrics": ["fraud_probability"],
                     "groupby": ["incident_type"]
