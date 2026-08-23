@@ -12,21 +12,21 @@ concat_txt_path = os.path.join(proj_root, 'docs', 'media', 'slides.txt')
 with wave.open(audio_path, 'rb') as w:
     total_audio_sec = w.getnframes() / float(w.getframerate())
 
-print(f"[FFmpeg Fast Builder] Audio Duration: {total_audio_sec:.3f} seconds ({total_audio_sec/60:.2f} minutes)")
+print(f"[FFmpeg Fast Builder] Storyboard Audio Duration: {total_audio_sec:.3f} seconds ({total_audio_sec/60:.2f} minutes)")
 
-# 11 Storyboard Sections with proportional duration scaling to match total_audio_sec exactly
+# 11 Storyboard Sections matching the storytelling audio script
 sections = [
-    ("01. INTRODUCTION & BUSINESS CONTEXT", "architecture/platform_architecture_diagram.png", 25.0),
-    ("02. END-TO-END SYSTEM TOPOLOGY", "architecture/platform_architecture_diagram.png", 45.0),
-    ("03. PYSPARK MEDALLION LAKEHOUSE (BRONZE -> SILVER -> GOLD)", "cicd/master_tests_71_pass.png", 55.0),
-    ("04. DATABRICKS DELTA LAKE 6/6 SECTOR RECONCILIATION", "databricks/reconciliation_report.png", 42.0),
-    ("05. MLOPS & PREDICTIVE RISK SUITE", "ai/llm_gateway_architecture.png", 42.0),
-    ("06. MULTI-TIER AI COPILOT & AST SQL SECURITY", "ai/llm_gateway_architecture.png", 55.0),
-    ("07. APACHE SUPERSET BI DASHBOARDS", "dashboards/superset_executive_logged_in.png", 45.0),
-    ("08. REACT COMMAND CENTER WEB APPLICATION", "frontend/react_command_center_ui.png", 35.0),
-    ("09. MASTER CI/CD PIPELINE & TESTING (71/71 PASS)", "cicd/master_tests_71_pass.png", 18.0),
-    ("10. GOOGLE CLOUD PLATFORM TERRAFORM BOUNDARY", "gcp/gcp_console_project.png", 15.0),
-    ("11. SUMMARY & OFFICIAL ARCHITECTURE CLASSIFICATION", "architecture/platform_architecture_diagram.png", 15.5)
+    ("01. INTRODUCTION & BUSINESS CONTEXT", "architecture/platform_architecture_diagram.png", 32.0),
+    ("02. END-TO-END SYSTEM TOPOLOGY", "architecture/platform_architecture_diagram.png", 52.0),
+    ("03. PYSPARK MEDALLION LAKEHOUSE (BRONZE -> SILVER -> GOLD)", "cicd/master_tests_71_pass.png", 62.0),
+    ("04. DATABRICKS DELTA LAKE 6/6 SECTOR RECONCILIATION", "databricks/reconciliation_report.png", 48.0),
+    ("05. MLOPS & PREDICTIVE RISK SUITE", "ai/llm_gateway_architecture.png", 48.0),
+    ("06. MULTI-TIER AI COPILOT & AST SQL SECURITY", "ai/llm_gateway_architecture.png", 62.0),
+    ("07. APACHE SUPERSET BI DASHBOARDS", "dashboards/superset_executive_logged_in.png", 50.0),
+    ("08. REACT COMMAND CENTER WEB APPLICATION", "frontend/react_command_center_ui.png", 38.0),
+    ("09. MASTER CI/CD PIPELINE & TESTING (71/71 PASS)", "cicd/master_tests_71_pass.png", 28.0),
+    ("10. GOOGLE CLOUD PLATFORM TERRAFORM BOUNDARY", "gcp/gcp_console_project.png", 22.0),
+    ("11. SUMMARY & OFFICIAL ARCHITECTURE CLASSIFICATION", "architecture/platform_architecture_diagram.png", 23.6)
 ]
 
 sum_dur = sum(s[2] for s in sections)
@@ -46,7 +46,7 @@ with open(concat_txt_path, 'w') as f:
 print(f"[FFmpeg Fast Builder] Created slide manifest {concat_txt_path}")
 
 ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
-print(f"[FFmpeg Fast Builder] Executing FFmpeg video encode & audio mux...")
+print(f"[FFmpeg Fast Builder] Executing FFmpeg H.264 25fps video encode & AAC audio mux...")
 
 cmd = [
     ffmpeg_exe,

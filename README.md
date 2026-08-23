@@ -12,46 +12,46 @@
 
 ---
 
-## 🎥 Complete Platform Demonstration (6.5-Minute Video & Embedded AI Voice)
+## 🎥 Complete Platform Demonstration (7.76-Minute Story-Driven Video & Muxed AI Voice)
 
-- 🎬 **Complete Video Demo (Muxed AAC Audio Track)**: [`docs/media/enterprise_platform_demo_video.mp4`](docs/media/enterprise_platform_demo_video.mp4)
-- 🎙️ **Standalone AI Voice Narration WAV**: [`docs/media/demo_narration.wav`](docs/media/demo_narration.wav)
-- 📐 **Video Technical Specifications**: 1280x720 (720p HD) | Duration: **6m 32.5s** (392.5s) | Audio Codec: AAC 96kbps | Video Codec: H.264 25fps | Audio Embedded: **YES**
+- 🎬 **Complete Video Demo (Muxed AAC Audio Track)**: [`docs/media/enterprise_platform_demo_video.mp4`](docs/media/enterprise_platform_demo_video.mp4) (14.37 MB MP4)
+- 🎙️ **Standalone AI Voice Narration WAV**: [`docs/media/demo_narration.wav`](docs/media/demo_narration.wav) (20.53 MB Audio)
+- 📐 **Video Technical Specifications**: 1280x720 (720p HD) | Duration: **7m 45s** (465.6s) | Audio Codec: AAC 95kbps | Video Codec: H.264 25fps | Audio Embedded: **YES**
 
-### 🎙️ AI Voice Storyboard & Narration Transcript
+### 🎙️ AI Voice Storyboard & Storytelling Transcript
 
 > **00:00 — Section 1: Introduction & Business Context**  
-> *"Welcome to the technical demonstration of the Enterprise Multi-Sector Data Engineering, Machine Learning Ops, Business Intelligence, and AI Copilot Platform. Modern enterprise architectures require processing heterogeneous datasets across financial, healthcare, clinical, insurance, and retail sectors with strict data quality, auditability, and production-grade security standards. This platform processes credit card transactions, banking loans, hospital bed capacity telemetry, clinical readmission records, insurance claims, and retail sales."*  
+> *"Welcome to this engineering walkthrough of the Enterprise Multi-Sector Data Engineering, Machine Learning, Business Intelligence, and AI Copilot Platform. Why do modern enterprises need a multi-sector data engineering and AI platform? In production environments, data is split across silos—financial transactions, healthcare telemetry, clinical records, insurance claims, and retail sales. To make real-time decisions, leadership needs unified ingestion, strict data quality, and secure AI capabilities without compromising auditability. This platform unifies six distinct industry sectors into a single production-grade pipeline."*  
 >  
-> **00:25 — Section 2: End-to-End System Architecture**  
-> *"Here we see the complete system topology. Live external feeds including stock quotes, air quality telemetry, and public economic indicators flow into a 3-stage PySpark Medallion Lakehouse. Raw data is ingested into Bronze Parquet storage, cleaned and validated in Silver, and summarized into Gold data marts. Silver data is aggregated into 6 Gold sector data marts, which synchronize to Databricks SQL Warehouse, PostgreSQL, SQLite, and Apache Superset BI, while natural language user queries pass through an Agentic Router to Google Gemini 2.5 Flash, OxAlpha, or deterministic fallbacks, guarded by an AST SQL security parser."*  
+> **00:32 — Section 2: End-to-End System Architecture**  
+> *"Let's trace how data flows through the complete system architecture. Raw streams from Alpha Vantage stock quotes, OpenAQ air quality data, and economic indicators enter a three-stage PySpark Medallion Lakehouse. Raw data is stored in Bronze, validated and cleaned in Silver with malformed records routed to quarantine, and aggregated into Gold sector data marts. These Gold marts synchronize to Databricks Delta Lake, PostgreSQL, SQLite, and Apache Superset BI. When users ask natural language questions, their queries are evaluated by an Agentic Router, dispatched to Google Gemini 2.5 Flash or OxAlpha via OpenRouter Gateway, and protected by an AST SQL security parser before executing against the data layer."*  
 >  
-> **01:10 — Section 3: Data Engineering & PySpark Medallion Lakehouse**  
-> *"The Data Engineering pipeline processes raw inputs with ingestion timestamps, metadata provenance, and UUID primary keys in Bronze storage. The Silver stage executes custom schema validators. Invalid rows failing quality rules are automatically routed to quarantine storage for audit inspection. Gold data marts aggregate domain metrics including fraud risk scores, default probabilities, bed occupancy percentages, readmission risks, and gross retail revenues."*  
+> **01:24 — Section 3: Data Engineering & PySpark Medallion Lakehouse**  
+> *"In the Data Engineering core, raw data enters Bronze storage attached with ingestion timestamps, metadata provenance, and UUID primary keys. The Silver stage enforces schema validation rules; records failing quality assertions are isolated in data quarantine for compliance auditing. Gold data marts summarize domain key performance indicators—credit card fraud scores, banking default risks, hospital bed occupancy rates, clinical readmission risks, and retail gross revenue totals."*  
 >  
-> **02:05 — Section 4: Databricks SQL Synchronization & Reconciliation**  
-> *"All 6 Gold sector data marts are synchronized with a live Databricks SQL Warehouse with ID 1f1403d78bfa0404. Automated reconciliation scripts execute queries against local Parquet marts and Databricks Delta tables. As shown in the reconciliation report, all 6 sectors achieved 100 percent row count matching and exact metric alignment, confirming 0.00 percent data variance across the lakehouse."*  
+> **02:26 — Section 4: Databricks SQL Synchronization & Reconciliation**  
+> *"The critical feature here is not simply loading data into Databricks. The platform actively verifies that the local Gold data marts and Databricks Delta tables agree. Automated reconciliation scripts query Databricks SQL Warehouse 1f1403d78bfa0404 to compare row counts and metric totals. Across all six sectors, the reconciliation achieved 100 percent row matching and exact metric alignment, confirming 0.00 percent data variance across the lakehouse."*  
 >  
-> **02:47 — Section 5: Machine Learning & MLOps Suite**  
-> *"The predictive analytics engine trains multi-sector machine learning models across XGBoost, LightGBM, Random Forest, Logistic Regression, and PyTorch Autoencoders. Model artifacts are tracked in the MLflow model registry with champion model selection. Explainable AI is powered by SHAP TreeExplainer, generating the top 3 explanation reasons for every flagged transaction anomaly, while Population Stability Index monitors feature distribution drift over time."*  
+> **03:14 — Section 5: Machine Learning & MLOps Suite**  
+> *"Beyond static analytics, the predictive analytics engine turns this data platform into an intelligence platform. We train multi-sector models across XGBoost, LightGBM, Random Forest, Logistic Regression, and PyTorch Autoencoders. Models are versioned in the MLflow model registry with champion model selection. Explainable AI is powered by SHAP TreeExplainer, revealing the top 3 driver reasons behind every flagged transaction anomaly, while Population Stability Index continuously monitors feature distribution drift over time."*  
 >  
-> **03:29 — Section 6: Multi-Tier AI Copilot Gateway & AST Security**  
-> *"The natural language AI Copilot routes queries using an Agentic Router. The LLM gateway prioritizes Google Gemini 2.5 Flash as Tier 1 primary, OxAlpha stealth slash ox-alpha via OpenRouter Gateway as Tier 2 secondary with live HTTP 200 verification, and an offline deterministic analytics engine as Tier 3 fallback. Legacy Ollama daemons have been completely purged from the codebase. Every Text-to-SQL query is inspected by a sqlglot AST parser, asserting that the root statement is strictly a SELECT operation and blocking any SQL injection or DDL/DML mutation attempts."*  
+> **04:02 — Section 6: Multi-Tier AI Copilot Gateway & AST Security**  
+> *"Now the platform moves from analytics to natural language interaction. A business user does not need to write SQL. They can simply ask a question in natural language. The Agentic Router prioritizes Google Gemini 2.5 Flash as Tier 1, OxAlpha via OpenRouter Gateway as Tier 2 with live HTTP 200 verification, and an offline deterministic analytics engine as Tier 3 fallback. Legacy Ollama daemons have been completely purged. To guarantee security, every generated Text-to-SQL query passes through a sqlglot AST parser that asserts the query root is strictly a SELECT statement, preventing SQL injection, DDL, or DML mutations."*  
 >  
-> **04:24 — Section 7: Apache Superset BI Layer**  
-> *"Business intelligence is programmatically provisioned using native Python REST API scripts. 1 database connection, 7 SqlaTable datasets, 9 slice charts, and 7 published dashboards are established on Docker port 8088. The Executive Command Center, Credit Card Fraud Intelligence, and Retail Demand dashboards render clean pie and table charts without visualization errors."*  
+> **05:04 — Section 7: Apache Superset Business Intelligence Layer**  
+> *"Gold analytical data is exposed visually through Apache Superset. Business intelligence is provisioned programmatically using Python REST API scripts, establishing 1 database connection, 7 SqlaTable datasets, 9 slice charts, and 7 published dashboards on Docker port 8088. Executives can inspect clean, interactive pie and table visualizations across Executive Command, Fraud Intelligence, and Retail Demand dashboards without visualization errors."*  
 >  
-> **05:09 — Section 8: React Command Center Web Application**  
-> *"The interactive web frontend is built with Vite, React TypeScript, and modern glassmorphic styling running on port 3000. Users can submit natural language queries to the AI Copilot, inspect live streaming feeds, view sector KPI metrics, and trigger lakehouse execution directly from the web interface."*  
+> **05:54 — Section 8: React Command Center Web Application**  
+> *"For live operational monitoring, the React TypeScript Command Center provides an interactive web interface running on port 3000. Users can type natural language queries into the AI Copilot, view real-time streaming telemetry, monitor sector key performance indicators, and trigger lakehouse runs directly from the browser."*  
 >  
-> **05:44 — Section 9: Master CI/CD Pipeline & Testing**  
-> *"DevOps automation is powered by a 4-job GitHub Actions workflow executing on every push to main. The master test suite run_tests.py runs 71 automated unit tests in under 260 seconds with 0 failures and 0 errors. CI jobs validate Python tests, Vite frontend build, and multi-stage Docker container images."*  
+> **06:32 — Section 9: Master CI/CD Pipeline & Testing**  
+> *"DevOps automation is enforced by a four-job GitHub Actions workflow executing on every push to main. The master test runner run_tests.py executes 71 automated unit tests in under 260 seconds with 0 failures and 0 errors. The CI pipeline validates Python logic, Vite React frontend compilation, and multi-stage Docker container builds."*  
 >  
-> **06:02 — Section 10: Infrastructure Boundary & Google Cloud Platform**  
-> *"Google Cloud Platform infrastructure for project enterprise-data-ai-platform is fully declared using Terraform HCL. Declarative manifests define Cloud Run API backend services, GCS Medallion buckets, BigQuery analytics datasets, and cost alert safeguards. Live GCP Cloud Run hosting is unexecuted due to GCP billing availability, keeping the project cleanly scoped as a release candidate."*  
+> **07:00 — Section 10: Infrastructure Boundary & Google Cloud Platform**  
+> *"To be completely clear and honest about the infrastructure boundary: Google Cloud Platform resources for project enterprise-data-ai-platform are fully declared using Terraform HCL for Cloud Run services, Cloud Storage Medallion buckets, and BigQuery datasets. However, live Cloud Run hosting was not executed because the project currently operates without an active GCP billing setup."*  
 >  
-> **06:17 — Section 11: Summary & Official Architecture Classification**  
-> *"In summary, this platform demonstrates enterprise-grade Data Engineering, Databricks Delta Lake reconciliation, multi-tier AI gateway security, and native BI integration. The project is officially classified as an Enterprise-Grade Production-Like Prototype and Release Candidate with 71/71 passing unit tests and 0.00 percent Databricks variance."*
+> **07:22 — Section 11: Final Summary & Official Architecture Classification**  
+> *"In summary, this platform combines PySpark data engineering, Databricks Delta Lake synchronization, predictive machine learning, multi-tier generative AI security, native BI dashboards, and continuous integration into one unified architecture. The project is officially classified as an Enterprise-Grade Production-Like Prototype and Release Candidate with 71 passing tests and 0.00 percent Databricks variance."*
 
 ---
 
