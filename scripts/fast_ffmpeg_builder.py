@@ -12,7 +12,7 @@ concat_txt_path = os.path.join(proj_root, 'docs', 'media', 'slides.txt')
 with wave.open(audio_path, 'rb') as w:
     total_audio_sec = w.getnframes() / float(w.getframerate())
 
-print(f"[FFmpeg Fast Builder] Storyboard Audio Duration: {total_audio_sec:.3f} seconds ({total_audio_sec/60:.2f} minutes)")
+print(f"[FFmpeg Builder] Storyboard Audio Duration: {total_audio_sec:.3f} seconds ({total_audio_sec/60:.2f} minutes)")
 
 # 11 Storyboard Sections matching the storytelling audio script
 sections = [
@@ -43,10 +43,10 @@ with open(concat_txt_path, 'w') as f:
     last_img = os.path.join(base_img_dir, sections[-1][1]).replace('\\', '/')
     f.write(f"file '{last_img}'\n")
 
-print(f"[FFmpeg Fast Builder] Created slide manifest {concat_txt_path}")
+print(f"[FFmpeg Builder] Created slide manifest {concat_txt_path}")
 
 ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
-print(f"[FFmpeg Fast Builder] Executing FFmpeg H.264 25fps video encode & AAC audio mux...")
+print(f"[FFmpeg Builder] Executing FFmpeg H.264 25fps video encode & AAC audio mux (Trimmed to {total_audio_sec:.3f}s)...")
 
 cmd = [
     ffmpeg_exe,
@@ -61,18 +61,18 @@ cmd = [
     '-preset', 'ultrafast',
     '-c:a', 'aac',
     '-b:a', '192k',
-    '-shortest',
+    '-t', str(total_audio_sec),
     final_video_path
 ]
 
 res = subprocess.run(cmd, capture_output=True, text=True)
-print(f"[FFmpeg Fast Builder] Exit code: {res.returncode}")
+print(f"[FFmpeg Builder] Exit code: {res.returncode}")
 
 if os.path.exists(concat_txt_path):
     os.remove(concat_txt_path)
 
 if os.path.exists(final_video_path):
     size_mb = os.path.getsize(final_video_path) / (1024 * 1024)
-    print(f"[FFmpeg Fast Builder] SUCCESS! Final Muxed MP4: {final_video_path} ({size_mb:.2f} MB)")
+    print(f"[FFmpeg Builder] SUCCESS! Final Trimmed Muxed MP4: {final_video_path} ({size_mb:.2f} MB)")
 else:
-    print(f"[FFmpeg Fast Builder] Error: {res.stderr}")
+    print(f"[FFmpeg Builder] Error: {res.stderr}")
