@@ -1,0 +1,180 @@
+"""
+Databricks Runtime Verification Script.
+
+Executes REAL SQL queries against the Databricks SQL Warehouse and
+records evidence of successful connectivity.
+
+IMPORTANT:
+- The SQL Warehouse MUST be RUNNING before executing this script.
+- This script performs REAL cloud compute. A stopped warehouse will be
+  started by Databricks automatically on first query (with ~15s cold start).
+- Never run this script in CI unless DATABRICKS_TOKEN secret is configured.
+
+Verification queries:
+  1. SELECT 1 AS databricks_connection_test
+  2. SELECT current_catalog(), current_schema(), current_user()
+
+Evidence is written to: docs/DATABRICKS_RUNTIME_EVIDENCE.md
+
+Usage:
+    python scripts/verify_databricks_runtime.py
+"""
+
+import sys
+import os
+import json
+from datetime import datetime, timezone
+
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from data_engineering.databricks.sql import DatabricksSQLExecutor
+from data_engineering.databricks.health import DatabricksHealthChecker
+
+
+EVIDENCE_FILE = os.path.join("docs", "DATABRICKS_RUNTIME_EVIDENCE.md")
+
+
+def run_verification() -> dict:
+    """Runs all runtime verification steps and returns evidence dict."""
+    results = {
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "host": os.environ.get("DATABRICKS_HOST", "<not set>"),
+        "warehouse_id": os.environ.get("DATABRICKS_WAREHOUSE_ID", "<not set>"),
+        "queries": [],
+        "overall": "FAIL",
+    }
+
+    executor = DatabricksSQLExecutor(timeout_secs=60)
+
+    # --- Query 1: Connection test ---
+    print("\n[Runtime Verify] Executing: SELECT 1 AS databricks_connection_test ...")
+    q1 = executor.execute_connection_test()
+    status1 = "PASS" if q1["success"] and q1["rows"] else "FAIL"
+    results["queries"].append({
+        "query": "SELECT 1 AS databricks_connection_test",
+        "status": status1,
+        "rows": q1.get("rows", []),
+        "elapsed_secs": q1.get("elapsed_secs"),
+        "error": q1.get("error"),
+    })
+    if status1 == "PASS":
+        print(f"  [PASS] — rows: {q1['rows']}  ({q1['elapsed_secs']}s)")
+    else:
+        print(f"  [FAIL] — {q1.get('error', 'no rows returned')}")
+
+    # --- Query 2: Catalog context ---
+    print("\n[Runtime Verify] Executing: SELECT current_catalog(), current_schema(), current_user() ...")
+    q2 = executor.execute_catalog_context()
+    status2 = "PASS" if q2["success"] and q2["rows"] else "FAIL"
+    results["queries"].append({
+        "query": "SELECT current_catalog(), current_schema(), current_user()",
+        "status": status2,
+        "rows": q2.get("rows", []),
+        "elapsed_secs": q2.get("elapsed_secs"),
+        "error": q2.get("error"),
+    })
+    if status2 == "PASS":
+        print(f"  [PASS] — rows: {q2['rows']}  ({q2['elapsed_secs']}s)")
+    else:
+        print(f"  [FAIL] — {q2.get('error', 'no rows returned')}")
+
+    # Determine overall
+    all_pass = all(q["status"] == "PASS" for q in results["queries"])
+    results["overall"] = "PASS" if all_pass else "FAIL"
+
+    return results
+
+
+def write_evidence(results: dict) -> None:
+    """Writes runtime evidence to docs/DATABRICKS_RUNTIME_EVIDENCE.md."""
+    os.makedirs("docs", exist_ok=True)
+    ts = results["timestamp"]
+    host = results["host"].split("//")[-1].split("/")[0] if results["host"] != "<not set>" else results["host"]
+    overall = results["overall"]
+    badge = "[PASS]" if overall == "PASS" else "[FAIL]"
+
+    lines = [
+        "# Databricks Runtime Verification Evidence",
+        "",
+        f"**Verification Date**: {ts}",
+        f"**Workspace Host**: `{host}`",
+        f"**SQL Warehouse ID**: `{results['warehouse_id']}`",
+        f"**Overall Result**: **{badge}**",
+        "",
+        "---",
+        "",
+        "## Verification Queries",
+        "",
+    ]
+
+    for i, q in enumerate(results["queries"], 1):
+        q_badge = "[PASS]" if q["status"] == "PASS" else "[FAIL]"
+        lines.append(f"### Query {i}: `{q['query']}`")
+        lines.append("")
+        lines.append(f"**Status**: {q_badge}")
+        if q.get("elapsed_secs") is not None:
+            lines.append(f"**Elapsed**: {q['elapsed_secs']}s")
+        if q["rows"]:
+            lines.append(f"**Result**: `{json.dumps(q['rows'])}`")
+        if q.get("error"):
+            lines.append(f"**Error**: `{q['error'][:300]}`")
+        lines.append("")
+
+    lines += [
+        "---",
+        "",
+        "## Verification Status Classification",
+        "",
+        "| Layer | Status |",
+        "| :--- | :---: |",
+        f"| `SELECT 1` connectivity | {results['queries'][0]['status'] if results['queries'] else 'N/A'} |",
+        f"| Catalog context query | {results['queries'][1]['status'] if len(results['queries']) > 1 else 'N/A'} |",
+        f"| **Runtime Verification** | **{overall}** |",
+        "",
+        "> This evidence was generated by real SQL execution against the Databricks SQL Warehouse.",
+        "> Mocked unit tests in `tests/test_databricks_integration.py` are separate.",
+    ]
+
+    with open(EVIDENCE_FILE, "w") as f:
+        f.write("\n".join(lines) + "\n")
+
+    print(f"\n[Runtime Verify] Evidence written to: {EVIDENCE_FILE}")
+
+
+def main():
+    print("=" * 65)
+    print("  DATABRICKS RUNTIME VERIFICATION")
+    print("=" * 65)
+
+    # Quick pre-flight check (no compute)
+    checker = DatabricksHealthChecker()
+    configured = checker.check_workspace_configured()
+    if configured["status"] != "PASS":
+        print(f"\n[FAIL] Pre-flight FAIL: {configured['detail']}")
+        print("       Set DATABRICKS_TOKEN or DATABRICKS_CLIENT_ID/CLIENT_SECRET in your .env file.")
+        sys.exit(1)
+
+    results = run_verification()
+    write_evidence(results)
+
+    print("\n" + "=" * 65)
+    badge = "[PASS]" if results["overall"] == "PASS" else "[FAIL]"
+    print(f"  {badge}  OVERALL: {results['overall']}")
+    print("=" * 65 + "\n")
+
+    if results["overall"] == "PASS":
+        print("Databricks SQL Warehouse connectivity: RUNTIME VERIFIED")
+        sys.exit(0)
+    else:
+        print("Runtime verification FAILED. Review errors above.")
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

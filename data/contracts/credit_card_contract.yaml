@@ -1,0 +1,19 @@
+dataset: credit_card_transactions
+version: 1.0.0
+owner: Data Engineering Team
+
+required_columns:
+  - transaction_id
+  - customer_id
+  - amount_usd
+  - timestamp
+
+constraints:
+  amount_usd:
+    min: 0.0
+    max: 100000.0
+
+freshness:
+  max_delay_minutes: 30
+
+quality_threshold: 0.99

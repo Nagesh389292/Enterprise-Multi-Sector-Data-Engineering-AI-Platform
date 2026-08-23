@@ -1,0 +1,28 @@
+enterprise_snowflake:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: '../snowflake_warehouse.duckdb'
+      threads: 4
+    databricks:
+      type: databricks
+      host: "{{ env_var('DATABRICKS_HOST', 'https://dbc-988b03b0-c952.cloud.databricks.com') }}"
+      http_path: "/sql/1.0/warehouses/{{ env_var('DATABRICKS_WAREHOUSE_ID', '1f1403d78bfa0404') }}"
+      token: "{{ env_var('DATABRICKS_TOKEN', '') }}"
+      catalog: "{{ env_var('DATABRICKS_CATALOG', 'main') }}"
+      schema: "{{ env_var('DATABRICKS_SCHEMA', 'enterprise_gold') }}"
+      threads: 4
+      # Note: requires dbt-databricks package: pip install dbt-databricks
+      # Run against Databricks with: dbt run --target databricks
+    prod:
+      type: snowflake
+      account: "{{ env_var('SNOWFLAKE_ACCOUNT', 'dev_account') }}"
+      user: "{{ env_var('SNOWFLAKE_USER', 'dev_user') }}"
+      password: "{{ env_var('SNOWFLAKE_PASSWORD', 'dev_pass') }}"
+      role: "{{ env_var('SNOWFLAKE_ROLE', 'SYSADMIN') }}"
+      database: ENTERPRISE_DW
+      warehouse: COMPUTE_WH
+      schema: PUBLIC
+      threads: 4
+

@@ -1,0 +1,44 @@
+# Security & Credentials - NEVER commit sensitive files
+.env
+.env.*
+!.env.example
+*.json
+credentials/
+secrets/
+*.pem
+*.key
+
+# Python & Virtual Environments
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+*.sqlite3
+
+# Data Lake Storage (Local Dev Data)
+data/raw/*
+data/silver/*
+data/gold/*
+data/quarantine/*
+!data/**/.gitkeep
+
+# Machine Learning Artifacts
+ml/models/*.pkl
+*.joblib
+.huggingface/
+
+# Node.js & React Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.vite/
+.ds_store
+
+# Security & System Exclusions
+*.log
+*.db
+__pycache__
+node_modules
+dist
+models/*.pkl
