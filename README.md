@@ -2,7 +2,7 @@
 
 [![Release Candidate](https://img.shields.io/badge/Status-Release%20Candidate%20(RC)-green.svg)](#)
 [![CI/CD Pipeline](https://img.shields.io/badge/CI%2FCD-GitHub%20Actions-blue.svg)](.github/workflows/ci.yml)
-[![Master Unit Tests](https://img.shields.io/badge/Tests-65%2F65%20Passing-brightgreen.svg)](run_tests.py)
+[![Master Unit Tests](https://img.shields.io/badge/Tests-70%2F70%20Passing-brightgreen.svg)](run_tests.py)
 [![Databricks](https://img.shields.io/badge/Databricks-Cloud%20Data%20Engineering-red.svg)](data_engineering/databricks/)
 [![npm audit](https://img.shields.io/badge/npm%20audit-0%20vulnerabilities-brightgreen.svg)](npm_audit_report.json)
 [![PAT-04](https://img.shields.io/badge/PAT--04-Security%20Audit%20Conditional%20Pass-yellow.svg)](PAT_04_SECURITY_AUDIT_REPORT.md)
