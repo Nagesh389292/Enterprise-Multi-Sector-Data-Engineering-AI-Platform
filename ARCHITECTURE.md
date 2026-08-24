@@ -4,6 +4,8 @@
 
 ## 1. End-to-End System Topology
 
+![Enterprise Data Engineering & AI Platform Architecture](docs/media/architecture_diagram.png)
+
 ```
                   LIVE EXTERNAL DATA & EVENT STREAMING
            (Alpha Vantage, OpenAQ, RBI Macro, Redis Streams)

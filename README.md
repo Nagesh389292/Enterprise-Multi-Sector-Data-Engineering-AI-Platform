@@ -12,6 +12,18 @@
 
 ---
 
+## 🏗️ End-to-End System Architecture Diagram
+
+![Enterprise Data Engineering & AI Platform Architecture](docs/media/architecture_diagram.png)
+
+- **Data Sources**: Internal Operational Databases, Streaming Feeds, REST APIs, Files, External Public Feeds & GDELT Sentiment.
+- **Data Engineering (Lakehouse)**: Ingestion layer, Medallion Architecture (Bronze Raw $\rightarrow$ Silver Cleaned $\rightarrow$ Gold Curated) powered by PySpark 3.5.0, Databricks Delta Lake, and Data Quality Validation.
+- **Analytics & AI Layer**: MLOps (XGBoost, LightGBM, PyTorch, MLflow tracking, SHAP explainability) + AI Copilot (Gemini 2.5 Flash, OxAlpha via OpenRouter, AST SQL security).
+- **Applications & Consumption**: Apache Superset BI (7 Dashboards, 9 Charts), React TypeScript Command Center UI, REST APIs.
+- **DevOps & Governance**: GitHub Actions CI/CD (71/71 Tests), Terraform GCP IaC, Monitoring, Lineage & End-to-End Compliance.
+
+---
+
 ## 🎬 Live Project Execution Recording (Motion Walkthrough & Muxed AI Voice)
 
 - 🎬 **Complete Live Execution Video (Muxed AAC Audio)**: [`docs/media/enterprise_platform_demo_video.mp4`](docs/media/enterprise_platform_demo_video.mp4) (8.06 MB MP4)

@@ -16,6 +16,8 @@ All core software components, PySpark Medallion lakehouse processing, machine le
 
 ## 2. Platform Architecture
 
+![Enterprise Data Engineering & AI Platform Architecture](docs/media/architecture_diagram.png)
+
 ```text
                                  REAL-WORLD MULTI-SECTOR FEEDS
      (Credit Card Streams, Banking Risk, Healthcare OGD, Clinical EHR, Insurance Claims, Retail Sales)
@@ -35,7 +37,7 @@ All core software components, PySpark Medallion lakehouse processing, machine le
                           (RAG Vector DB, Intent Router, Tool Agent)
                                                 │
                                                 ▼
-                                      PRODUCTION DEPLOYMENT
+                                       PRODUCTION DEPLOYMENT
                     (Docker Compose / Superset Container / Databricks SQL Sync)
 ```
 
