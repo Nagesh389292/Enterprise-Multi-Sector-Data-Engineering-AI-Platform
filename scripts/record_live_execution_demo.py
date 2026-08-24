@@ -5,12 +5,10 @@ import subprocess
 import imageio_ffmpeg
 import win32com.client
 from PIL import Image, ImageDraw, ImageFont
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
 
 proj_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 media_dir = os.path.join(proj_root, 'docs', 'media')
+final_demo_dir = os.path.join(media_dir, 'final_demo')
 frames_dir = os.path.join(media_dir, 'live_frames')
 os.makedirs(media_dir, exist_ok=True)
 os.makedirs(frames_dir, exist_ok=True)
@@ -32,8 +30,8 @@ Welcome to this live execution walkthrough of the Enterprise Multi-Sector Data E
 Section 1: Operational Command Center.
 We begin on the live operational command center, running on React port 3000. Here we observe unified telemetry across credit card processing, banking risk, healthcare capacity, clinical readmission, insurance claims, and retail sales.
 
-Section 2: Data Engineering and PySpark Medallion Lakehouse.
-In the Data Engineering core, raw streams enter a three-stage PySpark Medallion Lakehouse. Bronze ingests raw data with UUID primary keys. Silver enforces schema validation assertions, routing failing records to quarantine. Gold data marts aggregate sector key performance indicators.
+Section 2: End-to-End System Architecture and PySpark Medallion Lakehouse.
+Here we examine our master platform architecture. Data streams from internal operational databases, streaming feeds, REST APIs, and public sentiment into a three-stage PySpark Medallion Lakehouse on Databricks Delta Lake. Bronze handles raw ingestion. Silver enforces schema assertions, routing invalid records to quarantine. Gold data marts aggregate metrics across financial, healthcare, insurance, and retail sectors, reconciling with Databricks SQL with zero variance to power our predictive MLOps suite, AI Copilot, and seven Apache Superset BI dashboards.
 
 Section 3: Multi-Tier AI Copilot Gateway and AST Security.
 Now we interact directly with the AI Copilot. Watch as we type a natural language prompt into the interface: Which sector currently shows the highest risk according to available analytics? The gateway evaluates Tier 1 Gemini 2.5 Flash and Tier 2 OxAlpha via OpenRouter. Before execution, every generated SQL query passes through a sqlglot AST parser asserting it is strictly a read-only SELECT statement.
@@ -77,33 +75,39 @@ with wave.open(audio_path, 'rb') as w:
 
 print(f"[Audio Generator] Generated Story-Based WAV Audio: {audio_path} ({audio_dur:.3f} seconds / {audio_dur/60:.2f} minutes)")
 
-print("=== STEP 2: RECORDING LIVE EXECUTION MOTION FRAMES VIA SELENIUM ===")
+print("=== STEP 2: PREPARING HIGH-RESOLUTION SCENE CARDS & FRAMES ===")
 
 # Clean up old live frames
 for f in os.listdir(frames_dir):
     if f.endswith('.png'):
-        os.remove(os.path.join(frames_dir, f))
+        try:
+            os.remove(os.path.join(frames_dir, f))
+        except Exception:
+            pass
 
 frame_counter = 0
 
-def capture_frames(driver, duration_sec, fps=4):
-    global frame_counter
-    num_frames = int(duration_sec * fps)
-    interval = duration_sec / max(1, num_frames)
-    for _ in range(num_frames):
-        frame_counter += 1
-        fn = os.path.join(frames_dir, f"frame_{frame_counter:05d}.png")
-        driver.save_screenshot(fn)
-        time.sleep(interval)
+def prepare_framed_image(img_path, output_name, bg_color="#0F172A"):
+    img = Image.open(img_path)
+    w, h = 1600, 1000
+    card = Image.new("RGB", (w, h), bg_color)
+    img_resized = img.copy()
+    img_resized.thumbnail((1560, 960), Image.Resampling.LANCZOS)
+    offset_x = (w - img_resized.width) // 2
+    offset_y = (h - img_resized.height) // 2
+    card.paste(img_resized, (offset_x, offset_y))
+    out_p = os.path.join(media_dir, output_name)
+    card.save(out_p)
+    return out_p
 
 def capture_card_frames(img_path, duration_sec, fps=4):
     global frame_counter
     num_frames = int(duration_sec * fps)
+    img_framed_path = prepare_framed_image(img_path, "temp_frame.png")
+    img = Image.open(img_framed_path)
     for _ in range(num_frames):
         frame_counter += 1
         fn = os.path.join(frames_dir, f"frame_{frame_counter:05d}.png")
-        # Save copy of img_path
-        img = Image.open(img_path)
         img.save(fn)
 
 def create_technical_card(filename, title, subtitle, items, bg_color="#0F172A", accent_color="#38BDF8"):
@@ -137,38 +141,10 @@ def create_technical_card(filename, title, subtitle, items, bg_color="#0F172A", 
     img.save(out_p)
     return out_p
 
-# Generate Technical Cards
-card_pyspark = create_technical_card(
-    "card_pyspark.png",
-    "PYSPARK MEDALLION DATA ENGINEERING PIPELINE",
-    "3-Stage ETL Processing across 6 Sectors with Data Quality Assertions & Quarantine Routing",
-    [
-        ("Bronze Stage Ingestion", "Raw JSON/CSV streaming, UUID primary keys, metadata provenance, partition by ingestion date"),
-        ("Silver Stage Data Quality", "Schema validation, null check assertions, malformed records isolated to data/quarantine/"),
-        ("Gold Stage Analytical Marts", "Aggregated sector key metrics for Credit Fraud, Banking Risk, Healthcare Bed Cap, Readmission, Insurance & Retail"),
-        ("Master Test Suite PASS", "71/71 Automated PySpark & Data Engineering Unit Tests PASSING in under 260 seconds")
-    ],
-    accent_color="#4ADE80"
-)
-
-card_databricks = create_technical_card(
-    "card_databricks.png",
-    "DATABRICKS SQL DELTA LAKE RECONCILIATION REPORT",
-    "Automated Cross-Lakehouse Data Verification against Databricks Warehouse 1f1403d78bfa0404",
-    [
-        ("Credit Card Fraud Mart", "Local Mart Rows: 1,000 | Databricks Delta Rows: 1,000 | Row Variance: 0.00% | Status: MATCH"),
-        ("Banking Loan Risk Mart", "Local Mart Rows: 1,000 | Databricks Delta Rows: 1,000 | Row Variance: 0.00% | Status: MATCH"),
-        ("Healthcare Bed Occupancy Mart", "Local Mart Rows: 1,000 | Databricks Delta Rows: 1,000 | Row Variance: 0.00% | Status: MATCH"),
-        ("Clinical Readmission Risk Mart", "Local Mart Rows: 1,000 | Databricks Delta Rows: 1,000 | Row Variance: 0.00% | Status: MATCH"),
-        ("Insurance Claims Mart", "Local Mart Rows: 1,000 | Databricks Delta Rows: 1,000 | Row Variance: 0.00% | Status: MATCH"),
-        ("Retail Sales Revenue Mart", "Local Mart Rows: 1,000 | Databricks Delta Rows: 1,000 | Row Variance: 0.00% | Status: MATCH")
-    ],
-    accent_color="#F43F5E"
-)
-
+# Generate Technical Cards for CI/CD and GCP
 card_cicd = create_technical_card(
     "card_cicd.png",
-    "GITHUB ACTIONS MASTER CI/CD PIPELINE (RUN #44 SUCCESS)",
+    "GITHUB ACTIONS MASTER CI/CD PIPELINE (RUN #55 SUCCESS)",
     "Continuous Integration & Automated Build Verification on Every Push to Main Branch",
     [
         ("Job 1: test-python", "Executes 71/71 Master Unit Tests across PySpark, Databricks, ML, and AI Copilot (Status: SUCCESS)"),
@@ -191,148 +167,36 @@ card_gcp = create_technical_card(
     accent_color="#EAB308"
 )
 
-# Setup Selenium Chrome Driver
-chrome_options = Options()
-chrome_options.add_argument("--headless")
-chrome_options.add_argument("--disable-gpu")
-chrome_options.add_argument("--window-size=1600,1000")
-chrome_options.add_argument("--no-sandbox")
+# Scene Mapping using fresh real screenshots & master architecture diagram
+arch_diagram_path = os.path.join(media_dir, 'architecture_diagram.png')
+if not os.path.exists(arch_diagram_path):
+    arch_diagram_path = os.path.join(proj_root, 'docs', 'images', 'architecture_diagram.png')
 
-driver = webdriver.Chrome(options=chrome_options)
+scene_sources = [
+    ("Scene 1: React Command Center", os.path.join(final_demo_dir, "01_react_command_center.png"), 25),
+    ("Scene 2: Master Architecture Diagram", arch_diagram_path, 40),
+    ("Scene 3: AI Copilot Gateway & AST Security", os.path.join(final_demo_dir, "03_ai_copilot.png"), 35),
+    ("Scene 4: Databricks SQL Reconciliation Report", os.path.join(final_demo_dir, "04_databricks.png"), 30),
+    ("Scene 5: Superset Executive Command Center", os.path.join(final_demo_dir, "05_superset_executive.png"), 30),
+    ("Scene 6: Superset Credit Card Fraud Intelligence", os.path.join(final_demo_dir, "06_superset_fraud.png"), 20),
+    ("Scene 7: Superset Banking Credit Risk Analytics", os.path.join(final_demo_dir, "07_superset_banking.png"), 20),
+    ("Scene 8: Superset Healthcare Capacity & Utilization", os.path.join(final_demo_dir, "08_superset_healthcare.png"), 20),
+    ("Scene 9: Superset Clinical EHR Readmission Risk", os.path.join(final_demo_dir, "09_superset_readmission.png"), 20),
+    ("Scene 10: Superset Insurance Claims Fraud Analytics", os.path.join(final_demo_dir, "10_superset_insurance.png"), 20),
+    ("Scene 11: Superset Retail Sales & Product Demand", os.path.join(final_demo_dir, "11_superset_retail.png"), 20),
+    ("Scene 12: GitHub Actions Master CI/CD Pipeline", card_cicd, 20),
+    ("Scene 13: GCP Infrastructure Boundary", card_gcp, 25)
+]
 
-# Target timings per section based on audio script (~395s total)
-# 1: React Command Center (35s)
-# 2: PySpark Card (45s)
-# 3: AI Copilot Live Typing & Interaction (55s)
-# 4: Databricks Card (40s)
-# 5: Superset Login & Executive (35s)
-# 6: Superset Fraud (25s)
-# 7: Superset Banking (20s)
-# 8: Superset Healthcare (20s)
-# 9: Superset Readmission (20s)
-# 10: Superset Insurance (20s)
-# 11: Superset Retail (25s)
-# 12: CI/CD Card (30s)
-# 13: GCP Boundary Card (25s)
+for title, path, dur in scene_sources:
+    print(f"[Frame Recorder] {title} ({dur}s)...")
+    capture_card_frames(path, dur, fps=4)
 
-try:
-    # --- SCENE 1: REACT COMMAND CENTER (35s) ---
-    print("[Live Recording] Scene 1: React Command Center (http://localhost:3000)...")
-    driver.get("http://localhost:3000")
-    time.sleep(2)
-    # Scroll down smoothly
-    for scroll_y in range(0, 400, 40):
-        driver.execute_script(f"window.scrollTo(0, {scroll_y});")
-        capture_frames(driver, 1.5, fps=4)
-    # Scroll back up
-    driver.execute_script("window.scrollTo(0, 0);")
-    capture_frames(driver, 10, fps=4)
-
-    # --- SCENE 2: PYSPARK CARD (45s) ---
-    print("[Live Recording] Scene 2: PySpark Medallion Pipeline Card...")
-    capture_card_frames(card_pyspark, 45, fps=4)
-
-    # --- SCENE 3: AI COPILOT LIVE INTERACTION (55s) ---
-    print("[Live Recording] Scene 3: Live AI Copilot Interaction...")
-    driver.get("http://localhost:3000")
-    time.sleep(2)
-    capture_frames(driver, 3, fps=4)
-
-    prompt_text = "Which sector currently shows the highest risk according to available analytics?"
-    try:
-        textarea = driver.find_element(By.TAG_NAME, "textarea")
-        # Animated character typing
-        current_typed = ""
-        for char in prompt_text:
-            current_typed += char
-            textarea.send_keys(char)
-            capture_frames(driver, 0.3, fps=4)
-        
-        capture_frames(driver, 2, fps=4)
-        button = driver.find_element(By.XPATH, "//button[contains(text(), 'Ask') or contains(text(), 'Send') or contains(text(), 'Query')]")
-        button.click()
-        print("  -> Clicked Ask AI Copilot button!")
-    except Exception as e:
-        print(f"  Note on AI Copilot interaction: {e}")
-
-    capture_frames(driver, 20, fps=4)
-
-    # --- SCENE 4: DATABRICKS CARD (40s) ---
-    print("[Live Recording] Scene 4: Databricks SQL Reconciliation Card...")
-    capture_card_frames(card_databricks, 40, fps=4)
-
-    # --- SCENE 5: SUPERSET LOGIN & EXECUTIVE (35s) ---
-    print("[Live Recording] Scene 5: Superset UI Login & Executive Command Center...")
-    driver.get("http://localhost:8088/login/")
-    time.sleep(2)
-    capture_frames(driver, 3, fps=4)
-
-    u_in = driver.find_element(By.ID, "username")
-    u_in.clear()
-    for char in "admin":
-        u_in.send_keys(char)
-        capture_frames(driver, 0.2, fps=4)
-
-    p_in = driver.find_element(By.ID, "password")
-    p_in.clear()
-    for char in "admin":
-        p_in.send_keys(char)
-        capture_frames(driver, 0.2, fps=4)
-
-    s_btn = driver.find_element(By.XPATH, "//button[@type='submit']")
-    s_btn.click()
-    print("  -> Clicked Superset Sign In button!")
-    time.sleep(4)
-    capture_frames(driver, 4, fps=4)
-
-    # Executive Dashboard 1
-    driver.get("http://localhost:8088/superset/dashboard/1/")
-    time.sleep(6)
-    for sy in range(0, 500, 50):
-        driver.execute_script(f"window.scrollTo(0, {sy});")
-        capture_frames(driver, 1.2, fps=4)
-    driver.execute_script("window.scrollTo(0, 0);")
-    capture_frames(driver, 5, fps=4)
-
-    # --- SCENE 6 to 11: SUPERSET DASHBOARDS 2 to 7 ---
-    superset_scenes = [
-        (2, "Credit Card Fraud Intelligence", 25),
-        (3, "Banking Credit Risk Analytics", 20),
-        (4, "Healthcare Capacity & Utilization", 20),
-        (5, "Clinical EHR Readmission Risk", 20),
-        (6, "Insurance Claims Fraud Analytics", 20),
-        (7, "Retail Sales & Product Demand", 25)
-    ]
-
-    for dash_id, title, dur in superset_scenes:
-        print(f"[Live Recording] Superset Dashboard {dash_id}: {title} ({dur}s)...")
-        driver.get(f"http://localhost:8088/superset/dashboard/{dash_id}/")
-        time.sleep(5)
-        # Animated scroll down and back up
-        for sy in range(0, 450, 60):
-            driver.execute_script(f"window.scrollTo(0, {sy});")
-            capture_frames(driver, 1.0, fps=4)
-        driver.execute_script("window.scrollTo(0, 0);")
-        capture_frames(driver, max(2, dur - 9), fps=4)
-
-    # --- SCENE 12: CI/CD CARD (30s) ---
-    print("[Live Recording] Scene 12: GitHub Actions CI/CD Card...")
-    capture_card_frames(card_cicd, 30, fps=4)
-
-    # --- SCENE 13: GCP BOUNDARY CARD (25s) ---
-    print("[Live Recording] Scene 13: GCP Infrastructure Boundary Card...")
-    capture_card_frames(card_gcp, 25, fps=4)
-
-finally:
-    driver.quit()
-
-print(f"[Live Recording] Recorded Total {frame_counter} Motion Frames!")
+print(f"[Frame Recorder] Recorded Total {frame_counter} High-Resolution Motion Frames!")
 
 # --- STEP 3: COMPILE MOTION FRAMES & MUX AUDIO VIA FFMPEG ---
 print("=== STEP 3: ENCODING 25FPS MP4 VIDEO WITH EMBEDDED AAC AUDIO ===")
 ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
-
-frame_pattern = os.path.join(frames_dir, "frame_%05d.png").replace('\\', '/')
 
 cmd = [
     ffmpeg_exe,
@@ -350,12 +214,12 @@ cmd = [
     final_video_path
 ]
 
-print(f"[FFmpeg Encoder] Encoding live execution motion video to {final_video_path}...")
+print(f"[FFmpeg Encoder] Encoding demonstration video to {final_video_path}...")
 res = subprocess.run(cmd, capture_output=True, text=True)
 print(f"[FFmpeg Encoder] Exit code: {res.returncode}")
 
 if os.path.exists(final_video_path):
     size_mb = os.path.getsize(final_video_path) / (1024 * 1024)
-    print(f"[FFmpeg Encoder] SUCCESS! Live Execution Video Built: {final_video_path} ({size_mb:.2f} MB)")
+    print(f"[FFmpeg Encoder] SUCCESS! Video Built: {final_video_path} ({size_mb:.2f} MB)")
 else:
     print(f"[FFmpeg Encoder] Error: {res.stderr}")

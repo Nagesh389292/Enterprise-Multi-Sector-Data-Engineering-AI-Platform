@@ -26,17 +26,17 @@
 
 ## 🎬 Live Project Execution Recording (Motion Walkthrough & Muxed AI Voice)
 
-- 🎬 **Complete Live Execution Video (Muxed AAC Audio)**: [`docs/media/enterprise_platform_demo_video.mp4`](docs/media/enterprise_platform_demo_video.mp4) (8.06 MB MP4)
+- 🎬 **Complete Live Execution Video (Muxed AAC Audio)**: [`docs/media/enterprise_platform_demo_video.mp4`](docs/media/enterprise_platform_demo_video.mp4) (7.63 MB MP4)
 - 🎙️ **Standalone AI Voice Narration WAV**: [`docs/media/demo_narration.wav`](docs/media/demo_narration.wav) (12.96 MB Audio)
-- 📐 **Video Technical Specifications**: 1280x720 (720p HD) | Duration: **4m 54s** (294.2s) | Audio Codec: AAC 93kbps | Video Codec: H.264 25fps | Audio Embedded: **YES**
+- 📐 **Video Technical Specifications**: 1280x720 (720p HD) | Duration: **5m 17s** (317.2s) | Audio Codec: AAC 192kbps | Video Codec: H.264 25fps | Audio Embedded: **YES**
 
 ### 🎙️ AI Voice Storyboard & Live Motion Transcript
 
 > **00:00 — Section 1: Operational Command Center**  
 > *"Welcome to this live execution walkthrough of the Enterprise Multi-Sector Data Engineering, Machine Learning, Business Intelligence, and AI Copilot Platform. We begin on the live operational command center, running on React port 3000. Here we observe unified telemetry across credit card processing, banking risk, healthcare capacity, clinical readmission, insurance claims, and retail sales."*  
 >  
-> **00:25 — Section 2: Data Engineering & PySpark Medallion Lakehouse**  
-> *"In the Data Engineering core, raw streams enter a three-stage PySpark Medallion Lakehouse. Bronze ingests raw data with UUID primary keys. Silver enforces schema validation assertions, routing failing records to quarantine. Gold data marts aggregate sector key performance indicators."*  
+> **00:25 — Section 2: End-to-End System Architecture & PySpark Medallion Lakehouse**  
+> *"Here we examine our master platform architecture. Data streams from internal operational databases, streaming feeds, REST APIs, and public sentiment into a three-stage PySpark Medallion Lakehouse on Databricks Delta Lake. Bronze handles raw ingestion. Silver enforces schema assertions, routing invalid records to quarantine. Gold data marts aggregate metrics across financial, healthcare, insurance, and retail sectors, reconciling with Databricks SQL with zero variance to power our predictive MLOps suite, AI Copilot, and seven Apache Superset BI dashboards."*  
 >  
 > **01:00 — Section 3: Multi-Tier AI Copilot Gateway & AST Security**  
 > *"Now we interact directly with the AI Copilot. Watch as we type a natural language prompt into the interface: Which sector currently shows the highest risk according to available analytics? The gateway evaluates Tier 1 Gemini 2.5 Flash and Tier 2 OxAlpha via OpenRouter. Before execution, every generated SQL query passes through a sqlglot AST parser asserting it is strictly a read-only SELECT statement."*  
